@@ -20,22 +20,35 @@ namespace InstaGen
 
         [SerializeField] bool _isCircularMovementEnabled;
         [SerializeField] int _currentRotatorIndex = 0;
+        [SerializeField] int _panelsCount = 0;
         [SerializeField] float _animationDurationTime;
 
         [SerializeField] AnimationCurve _animationCurve;
         [SerializeField] RectTransform _startPanel; 
         [SerializeField] RectTransform[] _panels;
 
-        void Start()
+        void OnEnable()
         {
             GestureRecognizer.Instance.OnSwipeEnabled += InitialRotatorAnimation;
             GestureRecognizer.Instance.OnSwipe += PlayRotatorAnimation;
+            GestureRecognizer.Instance.OnSwipe += Debug_RotatorDirectionInfo;
         }
 
         void OnDisable()
         {
             GestureRecognizer.Instance.OnSwipeEnabled -= InitialRotatorAnimation;
             GestureRecognizer.Instance.OnSwipe -= PlayRotatorAnimation;
+            GestureRecognizer.Instance.OnSwipe -= Debug_RotatorDirectionInfo;
+        }
+
+        void Start()
+        {
+            SetupReferences();
+        }
+
+        void SetupReferences()
+        {
+            _panelsCount = _panels.Length;
         }
 
         void InitialRotatorAnimation()
@@ -46,6 +59,11 @@ namespace InstaGen
         void PlayRotatorAnimation(SwipeData swipeData)
         {
             StartCoroutine(PanelAnimation(swipeData));
+        }
+
+        void Debug_RotatorDirectionInfo(SwipeData swipeData)
+        {
+            Debug.Log(string.Format("[Menu Rotator] Direction: {0}", swipeData.SwipeDirection));
         }
 
         IEnumerator StartInitialPanelAnimation()
@@ -59,16 +77,29 @@ namespace InstaGen
 
         IEnumerator PanelAnimation(SwipeData swipeData)
         {
-            if (swipeData.SwipeDirection == SwipeDirection.Left && (_currentRotatorIndex >= 0 && _currentRotatorIndex < _panels.Length - 1))
+            if (swipeData.SwipeDirection == SwipeDirection.Left && (_currentRotatorIndex >= 0 && _currentRotatorIndex < _panelsCount - 1))
             {
                 StartCoroutine(AnimatePanel(_panels[_currentRotatorIndex], _leftAlignment));
                 yield return StartCoroutine(AnimatePanel(_panels[++_currentRotatorIndex], _leftAlignment));
             }
 
-            if (swipeData.SwipeDirection == SwipeDirection.Right && (_currentRotatorIndex > 0 && _currentRotatorIndex < _panels.Length))
+            if (swipeData.SwipeDirection == SwipeDirection.Right && (_currentRotatorIndex > 0 && _currentRotatorIndex < _panelsCount))
             {
                 StartCoroutine(AnimatePanel(_panels[_currentRotatorIndex], _rightAlignment));
                 yield return StartCoroutine(AnimatePanel(_panels[--_currentRotatorIndex], _rightAlignment));
+            }
+
+            if (_isCircularMovementEnabled)
+            {
+                // TO DO
+                //if (_currentRotatorIndex == _panelsCount - 1)
+                //{
+                //    _currentRotatorIndex = 0;
+                //}
+                //else if (_currentRotatorIndex == 0)
+                //{
+                //    _currentRotatorIndex = _panelsCount - 1;
+                //}
             }
         }
 
