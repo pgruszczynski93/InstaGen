@@ -68,6 +68,14 @@ namespace InstaGen
 
         IEnumerator StartInitialPanelAnimation()
         {
+            //_startPanel.offsetMin =
+            //StartCoroutine(TweenHelper.TweenAction2D(
+            //    (newOffsetMin, newOffsetMax) =>
+            //    {
+
+            //    }
+            //    ));
+
             StartCoroutine(AnimatePanel(_startPanel, _leftAlignment));
             yield return StartCoroutine(AnimatePanel(_panels[_currentRotatorIndex], _leftAlignment));
 
@@ -89,18 +97,10 @@ namespace InstaGen
                 yield return StartCoroutine(AnimatePanel(_panels[--_currentRotatorIndex], _rightAlignment));
             }
 
-            if (_isCircularMovementEnabled)
-            {
-                // TO DO
-                //if (_currentRotatorIndex == _panelsCount - 1)
-                //{
-                //    _currentRotatorIndex = 0;
-                //}
-                //else if (_currentRotatorIndex == 0)
-                //{
-                //    _currentRotatorIndex = _panelsCount - 1;
-                //}
-            }
+            // TO DO
+            //if (_isCircularMovementEnabled)
+            //{
+            //}
         }
 
         IEnumerator AnimatePanel(RectTransform panel, Vector2 alignment)
