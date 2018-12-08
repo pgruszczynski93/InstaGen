@@ -10,21 +10,12 @@ namespace InstaGen
 
         const int SCROLL_STEP = 600; //modify when necessary
 
-        [SerializeField] float _contentMinPositionY;
-        [SerializeField] float _contentMaxPositionY;
+        [SerializeField] float _scrollTime;
 
-        [SerializeField] float _scrollDuration;
         [SerializeField] AnimationCurve _animationCurve;
         [SerializeField] RectTransform _scrollableElement;
         [SerializeField] Button _nextButton;
         [SerializeField] Button _previousButton;
-
-        // TO REFACTOR & FINISH
-        void Start()
-        {
-            _contentMinPositionY = _scrollableElement.anchoredPosition.y;
-            _contentMaxPositionY = -_contentMinPositionY;
-        }
 
         public void ScrollToNext()
         {
@@ -38,22 +29,20 @@ namespace InstaGen
 
         IEnumerator AnimateScrolling(SwipeDirection direction)
         {
-            yield return StartCoroutine(ScrollContent(direction));
-        }
-
-        IEnumerator ScrollContent(SwipeDirection direction)
-        {
-            float time = 0.0f;
-            Vector2 beginPos = _scrollableElement.anchoredPosition;
             float scrollDirection = direction == SwipeDirection.Up ? SCROLL_STEP * (-1) : SCROLL_STEP;
-            Vector2 endPos = new Vector2(beginPos.x, beginPos.y + scrollDirection);
-            while (time < _scrollDuration)
+            Vector2 scrollAnchoredPos = _scrollableElement.anchoredPosition;
+
+            TweenParameters parameters = new TweenParameters()
             {
-                time += Time.deltaTime;
-                _scrollableElement.anchoredPosition = Vector2.Lerp(beginPos, endPos, time/_scrollDuration);
-                yield return null;
-            }
-            _scrollableElement.anchoredPosition = new Vector2(0, Mathf.Clamp(_scrollableElement.anchoredPosition.y, _contentMinPositionY, _contentMaxPositionY));
+                startPos = scrollAnchoredPos,
+                endPos = new Vector2(scrollAnchoredPos.x, scrollAnchoredPos.y + scrollDirection),
+                animationCurve = _animationCurve,
+                durationTime = _scrollTime
+            };
+
+            yield return StartCoroutine(TweenHelper.TweenAction(
+                (newAnchoredPos) => _scrollableElement.anchoredPosition = newAnchoredPos, 
+                parameters));
         }
     }
 }
