@@ -1,15 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace InstaGen
 {
-    public struct OffsetMinMax
-    {
-        public Vector2 offsetMin;
-        public Vector2 offsetMax;
-    }
-
     public class MenuRotator : MonoBehaviour
     {
         const int HORIZONTAL_ALIGNMENT = 1080;
@@ -18,14 +11,16 @@ namespace InstaGen
         readonly Vector2 _leftAlignment = new Vector2 (-HORIZONTAL_ALIGNMENT, 0);
         readonly Vector2 _rightAlignment = new Vector2(HORIZONTAL_ALIGNMENT, 0);
 
-        [SerializeField] bool _isCircularMovementEnabled;
         [SerializeField] int _currentRotatorIndex = 0;
         [SerializeField] int _panelsCount = 0;
         [SerializeField] float _animationDurationTime;
 
         [SerializeField] AnimationCurve _animationCurve;
-        [SerializeField] RectTransform _startPanel; 
+        [SerializeField] RectTransform _currentMainPanel; 
         [SerializeField] RectTransform[] _panels;
+
+        TweenParameters firstTweenObjectParams = new TweenParameters();
+        TweenParameters secondTweenObjectParams = new TweenParameters();
 
         void OnEnable()
         {
@@ -66,75 +61,63 @@ namespace InstaGen
             Debug.Log(string.Format("[Menu Rotator] Direction: {0}", swipeData.SwipeDirection));
         }
 
+        TweenParameters InitializeParametersForOffset(RectTransform panel, Vector2 alignment)
+        {
+            return new TweenParameters()
+            {
+                tweenableRectTransform = panel,
+                startPos = new RectTweenableObject(panel, panel.offsetMin, panel.offsetMax),
+                endPos = new RectTweenableObject(panel, panel.offsetMin + alignment, panel.offsetMax + alignment),
+                animationCurve = _animationCurve,
+                durationTime = _animationDurationTime
+            };
+        }
+
         IEnumerator StartInitialPanelAnimation()
         {
-            //_startPanel.offsetMin =
-            //StartCoroutine(TweenHelper.TweenAction2D(
-            //    (newOffsetMin, newOffsetMax) =>
-            //    {
+            firstTweenObjectParams = InitializeParametersForOffset(_currentMainPanel, _leftAlignment);
+            secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
 
-            //    }
-            //    ));
+            StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObj) => SetCurrentPanelOffset(tweenableObj), firstTweenObjectParams));
+            yield return StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObj) => SetCurrentPanelOffset(tweenableObj), secondTweenObjectParams));
 
-            StartCoroutine(AnimatePanel(_startPanel, _leftAlignment));
-            yield return StartCoroutine(AnimatePanel(_panels[_currentRotatorIndex], _leftAlignment));
+            GestureRecognizer.Instance.IsSwipingEnabled = true;
+            StopCoroutine(TweenHelper.SimpleTweenAction());
+        }
 
-            GestureRecognizer.Instance.IsSwipingEnabled = true; 
-            _startPanel.gameObject.SetActive(false);
+        void SetCurrentPanelOffset(RectTweenableObject tweenableObject)
+        {
+            _currentMainPanel = tweenableObject.rectTransform;
+            _currentMainPanel.offsetMin = tweenableObject.propertyVector1;
+            _currentMainPanel.offsetMax = tweenableObject.propertyVector2;
         }
 
         IEnumerator PanelAnimation(SwipeData swipeData)
         {
+            GestureRecognizer.Instance.IsSwipingEnabled = false;
+
             if (swipeData.SwipeDirection == SwipeDirection.Left && (_currentRotatorIndex >= 0 && _currentRotatorIndex < _panelsCount - 1))
             {
-                StartCoroutine(AnimatePanel(_panels[_currentRotatorIndex], _leftAlignment));
-                yield return StartCoroutine(AnimatePanel(_panels[++_currentRotatorIndex], _leftAlignment));
+                firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
+                StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), firstTweenObjectParams));
+
+                ++_currentRotatorIndex;
+                secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
+                yield return StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
+
             }
 
             if (swipeData.SwipeDirection == SwipeDirection.Right && (_currentRotatorIndex > 0 && _currentRotatorIndex < _panelsCount))
             {
-                StartCoroutine(AnimatePanel(_panels[_currentRotatorIndex], _rightAlignment));
-                yield return StartCoroutine(AnimatePanel(_panels[--_currentRotatorIndex], _rightAlignment));
+                firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
+                StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), firstTweenObjectParams));
+
+                --_currentRotatorIndex;
+                secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
+                yield return StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
             }
 
-            // TO DO
-            //if (_isCircularMovementEnabled)
-            //{
-            //}
-        }
-
-        IEnumerator AnimatePanel(RectTransform panel, Vector2 alignment)
-        {
-            float currentTime = 0.0f;
-            float animationProgress = 0.0f;
-            float curveProgress = 0.0f;
-
-            OffsetMinMax startPanelOffsets = new OffsetMinMax()
-            {
-                offsetMin = panel.offsetMin,
-                offsetMax = panel.offsetMax
-            };
-
-            OffsetMinMax newPanelOffsets = new OffsetMinMax()
-            {
-                offsetMin = startPanelOffsets.offsetMin + alignment,
-                offsetMax = startPanelOffsets.offsetMax + alignment
-            };
-
-            while (currentTime < _animationDurationTime)
-            {
-                animationProgress = Mathf.Clamp01(currentTime / _animationDurationTime);
-                curveProgress = _animationCurve.Evaluate(animationProgress);
-
-                panel.offsetMin = Vector2.Lerp(startPanelOffsets.offsetMin, newPanelOffsets.offsetMin, curveProgress);
-                panel.offsetMax = Vector2.Lerp(startPanelOffsets.offsetMax, newPanelOffsets.offsetMax, curveProgress);
-
-                currentTime += Time.deltaTime;
-                yield return null;
-            }
-
-            panel.offsetMin = newPanelOffsets.offsetMin;
-            panel.offsetMax = newPanelOffsets.offsetMax;
+            GestureRecognizer.Instance.IsSwipingEnabled = true;
         }
     }
 }

@@ -1059,7 +1059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1080, y: 0}
   m_SizeDelta: {x: 0, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &228078184
@@ -2086,7 +2086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1055892766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4010,7 +4010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1765984503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4588,7 +4588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f66bd9736f0e744985f01cea9e3312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isCircularMovementEnabled: 0
   _currentRotatorIndex: 0
   _panelsCount: 0
   _animationDurationTime: 0.2
@@ -4616,7 +4615,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _startPanel: {fileID: 2134185832}
+  _currentMainPanel: {fileID: 2134185832}
   _panels:
   - {fileID: 228078183}
   - {fileID: 1055892766}
@@ -4632,12 +4631,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c292cdada1b996249a3466c5ade64cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contentMinPositionY: 0
-  _contentMaxPositionY: 0
-  _scrollDuration: 0.5
+  _scrollTime: 0.5
   _animationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -4765,7 +4780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2134185832
 RectTransform:
   m_ObjectHideFlags: 0

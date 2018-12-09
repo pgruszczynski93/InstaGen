@@ -17,11 +17,19 @@ namespace InstaGen
 
         public void ScrollToNext()
         {
+            if (_scrollableElement == null)
+            {
+                return;
+            }
             StartCoroutine(AnimateScrolling(SwipeDirection.Down));
         }
 
         public void ScrollToPrevious()
         {
+            if (_scrollableElement == null)
+            {
+                return;
+            }
             StartCoroutine(AnimateScrolling(SwipeDirection.Up));
         }
 
@@ -30,22 +38,24 @@ namespace InstaGen
             float scrollDirection = direction == SwipeDirection.Up ? SCROLL_STEP * (-1) : SCROLL_STEP;
 
             Vector2 scrollAnchoredPos = _scrollableElement.anchoredPosition;
-            Vector2x2 startAnchoredPosition = new Vector2x2(scrollAnchoredPos, TweenHelper.VectorZero);
-            Vector2x2 endAnchoredPosition = new Vector2x2(new Vector2(scrollAnchoredPos.x, scrollAnchoredPos.y + scrollDirection), TweenHelper.VectorZero);
+            RectTweenableObject tweenableObjectStart = new RectTweenableObject(_scrollableElement, scrollAnchoredPos, TweenHelper.VectorZero);
+            RectTweenableObject tweenableObjectEnd = new RectTweenableObject(_scrollableElement, new Vector2(scrollAnchoredPos.x, scrollAnchoredPos.y + scrollDirection), 
+                                                        TweenHelper.VectorZero);
 
             TweenParameters parameters = new TweenParameters()
             {
-                startPos = startAnchoredPosition,
-                endPos = endAnchoredPosition,
+                tweenableRectTransform = _scrollableElement,
+                startPos = tweenableObjectStart,
+                endPos = tweenableObjectEnd,
                 animationCurve = _animationCurve,
                 durationTime = _scrollTime
             };
 
-            yield return StartCoroutine(TweenHelper.TweenAction2D(
-                (newAnchoredPos) => _scrollableElement.anchoredPosition = newAnchoredPos.vectorRow1, 
+            yield return StartCoroutine(TweenHelper.SimpleTweenAction(
+                (tweenableObject) => _scrollableElement.anchoredPosition = tweenableObject.propertyVector1, 
                 parameters));
 
-            StopCoroutine(TweenHelper.TweenAction2D());
+            StopCoroutine(TweenHelper.SimpleTweenAction());
         }
     }
 }
