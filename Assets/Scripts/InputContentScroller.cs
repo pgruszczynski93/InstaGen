@@ -10,10 +10,16 @@ namespace InstaGen
 
         [SerializeField] float _scrollTime;
 
-        [SerializeField] AnimationCurve _animationCurve;
+        [SerializeField] AnimationCurve _animationCurve;    
         [SerializeField] RectTransform _scrollableElement;
         [SerializeField] Button _nextButton;
         [SerializeField] Button _previousButton;
+
+        void SetButtons(bool isEnabled)
+        {
+            _nextButton.gameObject.SetActive(isEnabled);
+            _previousButton.gameObject.SetActive(isEnabled);
+        }
 
         public void ScrollToNext()
         {
@@ -51,11 +57,15 @@ namespace InstaGen
                 durationTime = _scrollTime
             };
 
+            SetButtons(false);
+
             yield return StartCoroutine(TweenHelper.SimpleTweenAction(
                 (tweenableObject) => _scrollableElement.anchoredPosition = tweenableObject.propertyVector1, 
                 parameters));
 
             StopCoroutine(TweenHelper.SimpleTweenAction());
+
+            SetButtons(true);
         }
     }
 }

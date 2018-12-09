@@ -71,34 +71,5 @@ namespace InstaGen
                 onRectTransformChange(parameters.endPos);
             }
         }
-
-        //public static IEnumerator ArrayTweenAction(Action<Vector2x2, RectTransform> onRectTransformChange = null, RectTransform panel = null, TweenParameters parameters = null)
-        //{
-        //    float currentTime = 0.0f;
-        //    float animationProgress = 0.0f;
-        //    float curveProgress = 0.0f;
-
-        //    while (currentTime < parameters.durationTime)
-        //    {
-        //        animationProgress = Mathf.Clamp01(currentTime / parameters.durationTime);
-        //        curveProgress = parameters.animationCurve.Evaluate(animationProgress);
-
-        //        if (onRectTransformChange != null)
-        //        {
-        //            onRectTransformChange(new Vector2x2(
-        //                Vector2.Lerp(parameters.startPos.vectorRow1, parameters.endPos.vectorRow1, curveProgress),
-        //                Vector2.Lerp(parameters.startPos.vectorRow2, parameters.endPos.vectorRow2, curveProgress)), panel);
-        //        }
-
-
-        //        currentTime += Time.deltaTime;
-        //        yield return null;
-        //    }
-
-        //    if (onRectTransformChange != null)
-        //    {
-        //        onRectTransformChange(parameters.endPos, panel);
-        //    }
-        //}
     }
 }

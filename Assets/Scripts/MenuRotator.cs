@@ -104,7 +104,6 @@ namespace InstaGen
                 ++_currentRotatorIndex;
                 secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
                 yield return StartCoroutine(TweenHelper.SimpleTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
-
             }
 
             if (swipeData.SwipeDirection == SwipeDirection.Right && (_currentRotatorIndex > 0 && _currentRotatorIndex < _panelsCount))
