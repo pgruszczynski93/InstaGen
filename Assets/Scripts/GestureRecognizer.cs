@@ -40,6 +40,9 @@ namespace InstaGen
             }
             _instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // This line fixes badly working Rect Mask 2D 
+            Shader.EnableKeyword("UNITY_UI_CLIP_RECT");
         }
 
         void Update()
