@@ -18,13 +18,23 @@ namespace InstaGen
         }
     }
 
-    public class TweenParameters
+    public class TweenBaseParameters
+    {
+        public AnimationCurve animationCurve;
+        public float durationTime;
+    }
+
+    public class RectTweenParameters : TweenBaseParameters
     {
         public RectTransform tweenableRectTransform;
         public RectTweenableObject startPos;
         public RectTweenableObject endPos;
-        public AnimationCurve animationCurve;
-        public float durationTime;
+    }
+
+    public class AlphaTweenParameters : TweenBaseParameters
+    {
+        public CanvasGroup inGroup;
+        public CanvasGroup outGroup;
     }
 
     public static class TweenHelper
@@ -32,6 +42,9 @@ namespace InstaGen
         public static readonly Vector2 VectorZero = new Vector2(0, 0);
 
         static WaitForEndOfFrame WaitForEndOfFrame = new WaitForEndOfFrame();
+        static float currentTime;
+        static float animationProgress;
+        static float curveProgress;
 
         public static IEnumerator SkipFrames(int frames)
         {
@@ -42,11 +55,11 @@ namespace InstaGen
             yield return null;
         }
 
-        public static IEnumerator SimpleTweenAction(Action<RectTweenableObject> onRectTransformChange = null, TweenParameters parameters = null)
+        public static IEnumerator RectTweenAction(Action<RectTweenableObject> onRectTransformChange = null, RectTweenParameters parameters = null)
         {
-            float currentTime = 0.0f;
-            float animationProgress = 0.0f;
-            float curveProgress = 0.0f;
+            currentTime = 0.0f;
+            animationProgress = 0.0f;
+            curveProgress = 0.0f;
 
             while (currentTime < parameters.durationTime)
             {
@@ -69,6 +82,33 @@ namespace InstaGen
             if(onRectTransformChange != null)
             {
                 onRectTransformChange(parameters.endPos);
+            }
+        }
+
+        public static IEnumerator AlphaTweenAction(Action<float> onAlphaChange = null, AlphaTweenParameters parameters = null)
+        {
+            currentTime = 0.0f;
+            animationProgress = 0.0f;
+            curveProgress = 0.0f;
+
+            while (currentTime < parameters.durationTime)
+            {
+                animationProgress = Mathf.Clamp01(currentTime / parameters.durationTime);
+                curveProgress = parameters.animationCurve.Evaluate(animationProgress);
+
+                if (onAlphaChange != null)
+                {
+                    //onAlphaChange();
+                }
+
+
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            if (onAlphaChange != null)
+            {
+                //onAlphaChange();
             }
         }
     }
