@@ -5,65 +5,64 @@ namespace InstaGen
 {
     public class MenuRotator : MonoBehaviour
     {
-        const int HORIZONTAL_ALIGNMENT = 1080;
-        const int VERTICAL_ALIGNMENT = 100;
+        private const int HORIZONTAL_ALIGNMENT = 1080;
 
-        readonly Vector2 _leftAlignment = new Vector2 (-HORIZONTAL_ALIGNMENT, 0);
-        readonly Vector2 _rightAlignment = new Vector2(HORIZONTAL_ALIGNMENT, 0);
+        private readonly Vector2 _leftAlignment = new Vector2(-HORIZONTAL_ALIGNMENT, 0);
+        private readonly Vector2 _rightAlignment = new Vector2(HORIZONTAL_ALIGNMENT, 0);
 
-        [SerializeField] int _currentRotatorIndex = 0;
-        [SerializeField] int _panelsCount = 0;
-        [SerializeField] float _animationDurationTime;
+        [SerializeField] private AnimationCurve _animationCurve;
+        [SerializeField] private float _animationDurationTime;
+        [SerializeField] private RectTransform _currentMainPanel;
 
-        [SerializeField] AnimationCurve _animationCurve;
-        [SerializeField] RectTransform _currentMainPanel; 
-        [SerializeField] RectTransform[] _panels;
+        [SerializeField] private int _currentRotatorIndex;
+        [SerializeField] private RectTransform[] _panels;
+        [SerializeField] private int _panelsCount;
 
-        RectTweenParameters firstTweenObjectParams = new RectTweenParameters();
-        RectTweenParameters secondTweenObjectParams = new RectTweenParameters();
+        private RectTweenParameters firstTweenObjectParams = new RectTweenParameters();
+        private RectTweenParameters secondTweenObjectParams = new RectTweenParameters();
 
-        void OnEnable()
+        private void OnEnable()
         {
             GestureRecognizer.Instance.OnSwipeEnabled += InitialRotatorAnimation;
             GestureRecognizer.Instance.OnSwipe += PlayRotatorAnimation;
             GestureRecognizer.Instance.OnSwipe += Debug_RotatorDirectionInfo;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             GestureRecognizer.Instance.OnSwipeEnabled -= InitialRotatorAnimation;
             GestureRecognizer.Instance.OnSwipe -= PlayRotatorAnimation;
             GestureRecognizer.Instance.OnSwipe -= Debug_RotatorDirectionInfo;
         }
 
-        void Start()
+        private void Start()
         {
             SetupReferences();
         }
 
-        void SetupReferences()
+        private void SetupReferences()
         {
             _panelsCount = _panels.Length;
         }
 
-        void InitialRotatorAnimation()
+        private void InitialRotatorAnimation()
         {
             StartCoroutine(StartInitialPanelAnimation());
         }
 
-        void PlayRotatorAnimation(SwipeData swipeData)
+        private void PlayRotatorAnimation(SwipeData swipeData)
         {
             StartCoroutine(PanelAnimation(swipeData));
         }
 
-        void Debug_RotatorDirectionInfo(SwipeData swipeData)
+        private void Debug_RotatorDirectionInfo(SwipeData swipeData)
         {
             Debug.Log(string.Format("[Menu Rotator] Direction: {0}", swipeData.SwipeDirection));
         }
 
-        RectTweenParameters InitializeParametersForOffset(RectTransform panel, Vector2 alignment)
+        private RectTweenParameters InitializeParametersForOffset(RectTransform panel, Vector2 alignment)
         {
-            return new RectTweenParameters()
+            return new RectTweenParameters
             {
                 tweenableRectTransform = panel,
                 startPos = new RectTweenableObject(panel, panel.offsetMin, panel.offsetMax),
@@ -73,48 +72,57 @@ namespace InstaGen
             };
         }
 
-        IEnumerator StartInitialPanelAnimation()
+        private IEnumerator StartInitialPanelAnimation()
         {
             firstTweenObjectParams = InitializeParametersForOffset(_currentMainPanel, _leftAlignment);
             secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
 
-            StartCoroutine(TweenHelper.RectTweenAction((tweenableObj) => SetCurrentPanelOffset(tweenableObj), firstTweenObjectParams));
-            yield return StartCoroutine(TweenHelper.RectTweenAction((tweenableObj) => SetCurrentPanelOffset(tweenableObj), secondTweenObjectParams));
+            StartCoroutine(TweenHelper.RectTweenAction(tweenableObj => SetCurrentPanelOffset(tweenableObj),
+                firstTweenObjectParams));
+            yield return StartCoroutine(TweenHelper.RectTweenAction(tweenableObj => SetCurrentPanelOffset(tweenableObj),
+                secondTweenObjectParams));
 
             GestureRecognizer.Instance.IsSwipingEnabled = true;
             StopCoroutine(TweenHelper.RectTweenAction());
         }
 
-        void SetCurrentPanelOffset(RectTweenableObject tweenableObject)
+        private void SetCurrentPanelOffset(RectTweenableObject tweenableObject)
         {
             _currentMainPanel = tweenableObject.rectTransform;
             _currentMainPanel.offsetMin = tweenableObject.propertyVector1;
             _currentMainPanel.offsetMax = tweenableObject.propertyVector2;
         }
 
-        IEnumerator PanelAnimation(SwipeData swipeData)
+        private IEnumerator PanelAnimation(SwipeData swipeData)
         {
             GestureRecognizer.Instance.IsSwipingEnabled = false;
 
-            if (swipeData.SwipeDirection == SwipeDirection.Left && (_currentRotatorIndex >= 0 && _currentRotatorIndex < _panelsCount - 1))
+            if (swipeData.SwipeDirection == SwipeDirection.Left && _currentRotatorIndex >= 0 &&
+                _currentRotatorIndex < _panelsCount - 1)
             {
                 firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
-                StartCoroutine(TweenHelper.RectTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), firstTweenObjectParams));
+                StartCoroutine(TweenHelper.RectTweenAction(tweenableObject => SetCurrentPanelOffset(tweenableObject),
+                    firstTweenObjectParams));
 
                 ++_currentRotatorIndex;
                 secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
-                yield return StartCoroutine(TweenHelper.RectTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
+                yield return StartCoroutine(TweenHelper.RectTweenAction(
+                    tweenableObject => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
             }
 
-            if (swipeData.SwipeDirection == SwipeDirection.Right && (_currentRotatorIndex > 0 && _currentRotatorIndex < _panelsCount))
+            if (swipeData.SwipeDirection == SwipeDirection.Right && _currentRotatorIndex > 0 &&
+                _currentRotatorIndex < _panelsCount)
             {
                 firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
-                StartCoroutine(TweenHelper.RectTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), firstTweenObjectParams));
+                StartCoroutine(TweenHelper.RectTweenAction(tweenableObject => SetCurrentPanelOffset(tweenableObject),
+                    firstTweenObjectParams));
 
                 --_currentRotatorIndex;
                 secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
-                yield return StartCoroutine(TweenHelper.RectTweenAction((tweenableObject) => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
+                yield return StartCoroutine(TweenHelper.RectTweenAction(
+                    tweenableObject => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
             }
+
             StopCoroutine(TweenHelper.RectTweenAction());
             GestureRecognizer.Instance.IsSwipingEnabled = true;
         }

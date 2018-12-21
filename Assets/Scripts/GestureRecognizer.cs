@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 namespace InstaGen
 {
@@ -12,37 +12,37 @@ namespace InstaGen
 
     public class GestureRecognizer : MonoBehaviour
     {
-        static GestureRecognizer _instance = null;
-
-        [SerializeField] bool _isContinuousTouchEnabled;
-        [SerializeField] float _minSwipeDistance;
-        [SerializeField] Vector2 _touchBeginPos;
-        [SerializeField] Vector2 _touchEndPos;
+        [SerializeField] private bool _isContinuousTouchEnabled;
+        [SerializeField] private float _minSwipeDistance;
+        [SerializeField] private Vector2 _touchBeginPos;
+        [SerializeField] private Vector2 _touchEndPos;
 
         public Action OnSwipeEnabled = delegate { };
-        public event Action<SwipeData> OnSwipe = delegate { };
 
-        public bool IsSwipingEnabled { get; set; }
-        public static GestureRecognizer Instance
+        static GestureRecognizer()
         {
-            get
-            {
-                return _instance;
-            }
+            Instance = null;
         }
 
-        void Awake()
+        public bool IsSwipingEnabled { get; set; }
+
+        public static GestureRecognizer Instance { get; private set; }
+
+        public event Action<SwipeData> OnSwipe = delegate { };
+
+        private void Awake()
         {
-            if(_instance)
+            if (Instance)
             {
                 DestroyImmediate(gameObject);
                 return;
             }
-            _instance = this;
+
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
-        void Update()
+        private void Update()
         {
             CollectTouchInput();
         }
@@ -52,73 +52,80 @@ namespace InstaGen
             OnSwipeEnabled();
         }
 
-        void CollectTouchInput()
+        private void CollectTouchInput()
         {
-            if (IsSwipingEnabled && Input.touchCount > 0)
+            if (IsSwipingEnabled == false || Input.touchCount < 1)
             {
-                Touch currentTouch = Input.GetTouch(0);
-
-                if(currentTouch.phase == TouchPhase.Began)
-                {
-                    _touchBeginPos = _touchEndPos = currentTouch.position;
-                }
-
-                if (_isContinuousTouchEnabled && currentTouch.phase == TouchPhase.Moved)
-                {
-                    _touchEndPos = currentTouch.position;
-                    DetectSwipe();
-                }
-
-                if( currentTouch.phase == TouchPhase.Ended || currentTouch.phase == TouchPhase.Canceled)
-                {
-                    _touchEndPos = currentTouch.position;
-                    DetectSwipe();
-                }
+                return;
             }
+            
+            Touch currentTouch = Input.GetTouch(0);
+
+            if (currentTouch.phase == TouchPhase.Began)
+            {
+                _touchBeginPos = _touchEndPos = currentTouch.position;
+            }
+
+            if (_isContinuousTouchEnabled && currentTouch.phase == TouchPhase.Moved)
+            {
+                _touchEndPos = currentTouch.position;
+            }
+
+            if (currentTouch.phase >= TouchPhase.Ended)
+            {
+                _touchEndPos = currentTouch.position;
+            }
+            
+            DetectSwipe();
+
         }
 
-        void DetectSwipe()
+        private void DetectSwipe()
         {
-            if (IsAnySwipeDetected())
+            if (IsAnySwipeDetected() == false)
             {
-                SwipeDirection direction = SwipeDirection.NoSwipe;
-                if (IsHorizontalSwipeDetected())
-                {
-                    direction = _touchEndPos.x > _touchBeginPos.x ? SwipeDirection.Right : SwipeDirection.Left;
-                    SendSwipe(direction);
-                }
-                else
-                {
-                    direction = _touchEndPos.y > _touchBeginPos.y ? SwipeDirection.Up : SwipeDirection.Down;
-                    SendSwipe(direction);
-                }
-                _touchBeginPos = _touchEndPos;
+                return;
             }
+        
+            SwipeDirection direction = SwipeDirection.NoSwipe;
+            
+            if (IsHorizontalSwipeDetected())
+            {
+                direction = _touchEndPos.x > _touchBeginPos.x ? SwipeDirection.Right : SwipeDirection.Left;
+            }
+            else
+            {
+                direction = _touchEndPos.y > _touchBeginPos.y ? SwipeDirection.Up : SwipeDirection.Down;
+            }
+
+            SendSwipe(direction);
+
+            _touchBeginPos = _touchEndPos;
         }
 
-        bool IsAnySwipeDetected()
+        private bool IsAnySwipeDetected()
         {
             return VerticalSwipeDistance() > _minSwipeDistance || HorizontalSwipeDistance() > _minSwipeDistance;
         }
 
-        bool IsHorizontalSwipeDetected()
+        private bool IsHorizontalSwipeDetected()
         {
-            return HorizontalSwipeDistance() > VerticalSwipeDistance();    
+            return HorizontalSwipeDistance() > VerticalSwipeDistance();
         }
 
-        float VerticalSwipeDistance()
+        private float VerticalSwipeDistance()
         {
             return Math.Abs(_touchEndPos.y - _touchBeginPos.y);
         }
 
-        float HorizontalSwipeDistance()
+        private float HorizontalSwipeDistance()
         {
             return Math.Abs(_touchEndPos.x - _touchBeginPos.x);
         }
 
-        void SendSwipe(SwipeDirection direction)
+        private void SendSwipe(SwipeDirection direction)
         {
-            SwipeData swipeData = new SwipeData()
+            SwipeData swipeData = new SwipeData
             {
                 SwipeDirection = direction,
                 SwipeStartPos = _touchBeginPos,
@@ -128,5 +135,4 @@ namespace InstaGen
             OnSwipe(swipeData);
         }
     }
-
 }

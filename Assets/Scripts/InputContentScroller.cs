@@ -1,40 +1,54 @@
 ﻿using System.Collections;
-using UnityEngine.UI;
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InstaGen
 {
     public class InputContentScroller : MonoBehaviour
     {
-        const int SCROLL_STEP = 600; //modify when necessary
+        private const int SCROLL_STEP = 600; //modify when necessary
 
-        [SerializeField] float _scrollTime;
-        [SerializeField] bool _isScrollingPossible;
+        [SerializeField] private AnimationCurve _animationCurve;
+        [SerializeField] private bool _isScrollingPossible;
 
-        [SerializeField] AnimationCurve _animationCurve;    
-        [SerializeField] RectTransform _scrollableElement;
-        [SerializeField] NoDragScrollRect _scrollRect;
-        [SerializeField] CanvasGroup _rotatorInputPanel;
-        [SerializeField] CanvasGroup _normalInputPanel;
+        [SerializeField] private Button _nextButton;
+        [SerializeField] private CanvasGroup _normalInputPanel;
+        [SerializeField] private Button _previousButton;
+        [SerializeField] private CanvasGroup _rotatorInputPanel;
+        [SerializeField] private RectTransform _scrollableElement;
+        [SerializeField] private NoDragScrollRect _scrollRect;
 
-        [SerializeField] Button _nextButton;
-        [SerializeField] Button _previousButton;
+        [SerializeField] private float _scrollTime;
 
-        void SetButtons(bool isEnabled)
+        private void SetButtons(bool isEnabled)
         {
+            if (_nextButton == null || _previousButton == null)
+            {
+                return;
+            }
+            
             _nextButton.gameObject.SetActive(isEnabled);
             _previousButton.gameObject.SetActive(isEnabled);
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            _scrollRect.onValueChanged.AddListener((bounds) => TryToEnableScrollButtons(bounds));
+            if (_scrollRect == null)
+            {
+                return;
+            }
+            
+            _scrollRect.onValueChanged.AddListener(bounds => TryToEnableScrollButtons(bounds));
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            _scrollRect.onValueChanged.RemoveListener((bounds) => TryToEnableScrollButtons(bounds));
+            if (_scrollRect == null)
+            {
+                return;
+            }
+
+            _scrollRect.onValueChanged.RemoveListener(bounds => TryToEnableScrollButtons(bounds));
         }
 
         public void ScrollToNext()
@@ -43,6 +57,7 @@ namespace InstaGen
             {
                 return;
             }
+            
             StartCoroutine(AnimateScrolling(SwipeDirection.Down));
         }
 
@@ -52,19 +67,22 @@ namespace InstaGen
             {
                 return;
             }
+            
             StartCoroutine(AnimateScrolling(SwipeDirection.Up));
         }
 
-        IEnumerator AnimateScrolling(SwipeDirection direction)
+        private IEnumerator AnimateScrolling(SwipeDirection direction)
         {
-            float scrollDirection = direction == SwipeDirection.Up ? SCROLL_STEP * (-1) : SCROLL_STEP;
+            float scrollDirection = direction == SwipeDirection.Up ? SCROLL_STEP * -1 : SCROLL_STEP;
 
             Vector2 scrollAnchoredPos = _scrollableElement.anchoredPosition;
-            RectTweenableObject tweenableObjectStart = new RectTweenableObject(_scrollableElement, scrollAnchoredPos, TweenHelper.VectorZero);
-            RectTweenableObject tweenableObjectEnd = new RectTweenableObject(_scrollableElement, new Vector2(scrollAnchoredPos.x, scrollAnchoredPos.y + scrollDirection), 
-                                                        TweenHelper.VectorZero);
+            RectTweenableObject tweenableObjectStart =
+                new RectTweenableObject(_scrollableElement, scrollAnchoredPos, TweenHelper.VectorZero);
+            RectTweenableObject tweenableObjectEnd = new RectTweenableObject(_scrollableElement,
+                new Vector2(scrollAnchoredPos.x, scrollAnchoredPos.y + scrollDirection),
+                TweenHelper.VectorZero);
 
-            RectTweenParameters parameters = new RectTweenParameters()
+            RectTweenParameters parameters = new RectTweenParameters
             {
                 tweenableRectTransform = _scrollableElement,
                 startPos = tweenableObjectStart,
@@ -73,22 +91,17 @@ namespace InstaGen
                 durationTime = _scrollTime
             };
 
-            print(_scrollRect.normalizedPosition.y == 0 ? "dol" : _scrollRect.normalizedPosition.y == 1 ? "gora " : "jupi");
-
             if (_isScrollingPossible)
-            {
                 yield return StartCoroutine(TweenHelper.RectTweenAction(
-                    (tweenableObject) => _scrollableElement.anchoredPosition = tweenableObject.propertyVector1,
+                    tweenableObject => _scrollableElement.anchoredPosition = tweenableObject.propertyVector1,
                     parameters));
-            }
 
             StopCoroutine(TweenHelper.RectTweenAction());
         }
 
-        void TryToEnableScrollButtons(Vector2 bounds)
+        private void TryToEnableScrollButtons(Vector2 bounds)
         {
             float currY = bounds.y;
-            print("curry" + currY);
             _nextButton.gameObject.SetActive(currY > 0 && currY <= 1);
             _previousButton.gameObject.SetActive(currY >= 0 && currY < 1);
         }

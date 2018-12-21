@@ -3,9 +3,9 @@
     public enum SwipeDirection
     {
         NoSwipe,
-        Left, 
+        Left,
         Right,
         Up,
         Down
-    };
+    }
 }

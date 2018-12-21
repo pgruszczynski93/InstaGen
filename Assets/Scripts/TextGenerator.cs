@@ -1,28 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 namespace InstaGen
 {
     public class TextGenerator : MonoBehaviour
     {
+        private const string TITLE_PATTERN = "{0} {1} @ {2}, {3}";
+        private const string EXTENDED_TITLE_PATTERN = "{0} {1}, {2} @ {3}, {4}";
+        private const string EXTENDED_TITLE_PATTERN_DATE = "{0} {1}, {2} @ {3}, {4}, {5}";
+        private const string DESCRIPTION_PATTERN = "{0} {1} {2} {1}{1}{2} {3} {1} {4}";
+        [SerializeField] private Button _copyButton;
 
-        const string TITLE_PATTERN = "{0} {1} @ {2}, {3}";
-        const string EXTENDED_TITLE_PATTERN = "{0} {1}, {2} @ {3}, {4}";
-        const string EXTENDED_TITLE_PATTERN_DATE = "{0} {1}, {2} @ {3}, {4}, {5}";
-        const string DESCRIPTION_PATTERN = "{0} {1} {2} {1}{1}{2} {3} {1} {4}";
+        [SerializeField] private string _currentResult;
+        [SerializeField] private TMP_InputField[] _inputFields;
+        [SerializeField] private TMP_InputField _resultField;
+        [SerializeField] private string _separator;
 
-        [SerializeField] string _currentResult;
-        [SerializeField] string _separator;
-        [SerializeField] TMP_InputField[] _inputFields;
-        [SerializeField] TMP_InputField _resultField;
-        [SerializeField] Button _copyButton;
-
-        void Start()
+        private void Start()
         {
-
         }
 
         //void Update()
@@ -37,9 +33,9 @@ namespace InstaGen
 
         public void OnButtonClick()
         {
-            _currentResult = string.Format(EXTENDED_TITLE_PATTERN, _inputFields[0].text, _inputFields[1].text, _inputFields[2].text, _inputFields[3].text, _inputFields[4].text );
+            _currentResult = string.Format(EXTENDED_TITLE_PATTERN, _inputFields[0].text, _inputFields[1].text,
+                _inputFields[2].text, _inputFields[3].text, _inputFields[4].text);
             _resultField.text = _currentResult;
         }
     }
-
 }
