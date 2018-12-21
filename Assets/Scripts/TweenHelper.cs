@@ -59,10 +59,10 @@ namespace InstaGen
             curveProgress = 0.0f;
         }
 
-        private static void SetupTweenProperties(float animProgress, float curProgress)
+        private static void SetupTweenProperties(float tweenDuration, AnimationCurve animCurve)
         {
-            animationProgress = animProgress;
-            curveProgress = curProgress;
+            animationProgress = Mathf.Clamp01(currentTime / tweenDuration);
+            curveProgress =  animCurve.Evaluate(animationProgress);
         }
 
         public static IEnumerator RectTweenAction(Action<RectTweenableObject> onRectTransformChange = null,
@@ -74,8 +74,7 @@ namespace InstaGen
 
             while (currentTime < parameters.durationTime)
             {
-                SetupTweenProperties(Mathf.Clamp01(currentTime / parameters.durationTime),
-                    parameters.animationCurve.Evaluate(animationProgress));
+                SetupTweenProperties(parameters.durationTime, parameters.animationCurve);
 
                 if (onRectTransformChange != null)
                 {
@@ -92,7 +91,10 @@ namespace InstaGen
                 yield return null;
             }
 
-            if (onRectTransformChange != null) onRectTransformChange(parameters.endPos);
+            if (onRectTransformChange != null)
+            {
+                onRectTransformChange(parameters.endPos);
+            }
         }
 
         public static IEnumerator AlphaTweenAction(Action<float> onAlphaChange = null,
@@ -102,8 +104,7 @@ namespace InstaGen
 
             while (currentTime < parameters.durationTime)
             {
-                animationProgress = Mathf.Clamp01(currentTime / parameters.durationTime);
-                curveProgress = parameters.animationCurve.Evaluate(animationProgress);
+                SetupTweenProperties(parameters.durationTime, parameters.animationCurve);
 
                 if (onAlphaChange != null)
                 {
