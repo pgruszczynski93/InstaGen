@@ -20,6 +20,8 @@ namespace InstaGen
                     _parameters.inGroup.alpha = inAlpha;
                     _parameters.outGroup.alpha = outAlpha;
                 }, _parameters));
+            
+            StopCoroutine(TweenHelper.AlphaTweenAction());
         }
     }
 }
