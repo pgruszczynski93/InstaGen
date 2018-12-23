@@ -21,11 +21,6 @@ namespace InstaGen
 
         private void SetButtons(bool isEnabled)
         {
-            if (_nextButton == null || _previousButton == null)
-            {
-                return;
-            }
-            
             _nextButton.gameObject.SetActive(isEnabled);
             _previousButton.gameObject.SetActive(isEnabled);
         }
@@ -91,9 +86,15 @@ namespace InstaGen
             };
 
             if (_isScrollingPossible)
+            {
+                SetButtons(false);
+                
                 yield return StartCoroutine(TweenHelper.RectTweenAction(
                     tweenableObject => _scrollableElement.anchoredPosition = tweenableObject.propertyVector1,
                     parameters));
+                
+                SetButtons(true);
+            }
 
             StopCoroutine(TweenHelper.RectTweenAction());
         }
@@ -101,8 +102,14 @@ namespace InstaGen
         private void TryToEnableScrollButtons(Vector2 bounds)
         {
             float currY = bounds.y;
-            _nextButton.gameObject.SetActive(currY > 0 && currY <= 1);
-            _previousButton.gameObject.SetActive(currY >= 0 && currY < 1);
+            if (currY > 0 && currY < 1)
+            {
+                _nextPanelButton.gameObject.SetActive(false);
+                return;
+            }
+            
+            _nextButton.gameObject.SetActive(currY == 1.0f );
+            _previousButton.gameObject.SetActive(currY == 0.0f);
             _nextPanelButton.gameObject.SetActive(currY == 0.0f);
         }
     }

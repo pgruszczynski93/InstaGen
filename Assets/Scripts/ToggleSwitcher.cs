@@ -23,20 +23,24 @@ namespace InstaGen
 
 		public void SetNextToggle()
 		{
-			if (_toggleIndex < _toggleCount)
+			if (_toggleIndex > _toggleCount - 1)
 			{
-				_sideToggles[_toggleIndex].isOn = false;
-				_sideToggles[++_toggleIndex].isOn = true;
+				return;
 			}
+		
+			_sideToggles[_toggleIndex].isOn = false;
+			_sideToggles[++_toggleIndex].isOn = true;
 		}
 
 		public void SetPreviousToggle()
 		{
-			if (_toggleIndex > 0)
+			if (_toggleIndex < 1)
 			{
-				_sideToggles[_toggleIndex].isOn = false;
-				_sideToggles[--_toggleIndex].isOn = true;
+				return;
 			}
+			
+			_sideToggles[_toggleIndex].isOn = false;
+			_sideToggles[--_toggleIndex].isOn = true;
 		}
 	}
 }
