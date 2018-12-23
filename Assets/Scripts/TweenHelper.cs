@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace InstaGen
 {
+    [Serializable]
     public class RectTweenableObject
     {
         public Vector2 propertyVector1;
         public Vector2 propertyVector2;
         public RectTransform rectTransform;
-
+        
         public RectTweenableObject(RectTransform rectTransform, Vector2 propertyVector1, Vector2 propertyVector2)
         {
             this.rectTransform = rectTransform;
@@ -18,12 +19,14 @@ namespace InstaGen
         }
     }
 
+    [Serializable]
     public class TweenBaseParameters
     {
         public AnimationCurve animationCurve;
         public float durationTime;
     }
 
+    [Serializable]
     public class RectTweenParameters : TweenBaseParameters
     {
         public RectTweenableObject endPos;
@@ -31,6 +34,7 @@ namespace InstaGen
         public RectTransform tweenableRectTransform;
     }
 
+    [Serializable]
     public class AlphaTweenParameters : TweenBaseParameters
     {
         public CanvasGroup inGroup;
@@ -40,6 +44,8 @@ namespace InstaGen
     public static class TweenHelper
     {
         public static readonly Vector2 VectorZero = new Vector2(0, 0);
+        public static readonly float AlphaMax = 1.0f;
+        public static readonly float AlphaMin = 0.0f;
 
         private static readonly WaitForEndOfFrame WaitForEndOfFrame = new WaitForEndOfFrame();
         private static float currentTime;
@@ -68,10 +74,14 @@ namespace InstaGen
         public static IEnumerator RectTweenAction(Action<RectTweenableObject> onRectTransformChange = null,
             RectTweenParameters parameters = null)
         {
+
+            if (parameters == null)
+            {
+                yield break;
+            }
+            
             SetupInitialReferences();
-
-            if (parameters == null) yield break;
-
+            
             while (currentTime < parameters.durationTime)
             {
                 SetupTweenProperties(parameters.durationTime, parameters.animationCurve);
@@ -97,7 +107,7 @@ namespace InstaGen
             }
         }
 
-        public static IEnumerator AlphaTweenAction(Action<float> onAlphaChange = null,
+        public static IEnumerator AlphaTweenAction(Action<float, float> onAlphaChange = null,
             AlphaTweenParameters parameters = null)
         {
             SetupInitialReferences();
@@ -108,7 +118,9 @@ namespace InstaGen
 
                 if (onAlphaChange != null)
                 {
-                    //onAlphaChange();
+                    onAlphaChange(
+                        Mathf.Lerp(parameters.inGroup.alpha, AlphaMin, curveProgress),
+                        Mathf.Lerp(parameters.outGroup.alpha, AlphaMax, curveProgress));
                 }
 
 
@@ -118,7 +130,7 @@ namespace InstaGen
 
             if (onAlphaChange != null)
             {
-                //onAlphaChange();
+                onAlphaChange(Mathf.Clamp01(parameters.inGroup.alpha), Mathf.Clamp01(parameters.outGroup.alpha));
             }
         }
     }

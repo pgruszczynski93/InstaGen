@@ -1,14 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
-public class PanelFader : MonoBehaviour
+namespace InstaGen
 {
-    // Use this for initialization
-    private void Start()
+    public class PanelFader : MonoBehaviour
     {
-    }
+        [SerializeField] private AlphaTweenParameters _parameters;
 
-    // Update is called once per frame
-    private void Update()
-    {
+        public void ChangePanel()
+        {
+            StartCoroutine(ChangePanelRoutine());
+        }
+
+        private IEnumerator ChangePanelRoutine()
+        {
+            yield return StartCoroutine(TweenHelper.AlphaTweenAction((inAlpha, outAlpha) =>
+                {
+                    _parameters.inGroup.alpha = inAlpha;
+                    _parameters.outGroup.alpha = outAlpha;
+                }, _parameters));
+        }
     }
 }

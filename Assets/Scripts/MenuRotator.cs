@@ -16,10 +16,11 @@ namespace InstaGen
 
         [SerializeField] private int _currentRotatorIndex;
         [SerializeField] private RectTransform[] _panels;
-        [SerializeField] private int _panelsCount;
-
-        private RectTweenParameters firstTweenObjectParams = new RectTweenParameters();
-        private RectTweenParameters secondTweenObjectParams = new RectTweenParameters();
+        
+        private int _panelsCount;
+        
+        private RectTweenParameters _firstTweenObjectParams = new RectTweenParameters();
+        private RectTweenParameters _secondTweenObjectParams = new RectTweenParameters();
 
         private void OnEnable()
         {
@@ -74,13 +75,11 @@ namespace InstaGen
 
         private IEnumerator StartInitialPanelAnimation()
         {
-            firstTweenObjectParams = InitializeParametersForOffset(_currentMainPanel, _leftAlignment);
-            secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
+            _firstTweenObjectParams = InitializeParametersForOffset(_currentMainPanel, _leftAlignment);
+            _secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
 
-            StartCoroutine(TweenHelper.RectTweenAction(tweenableObj => SetCurrentPanelOffset(tweenableObj),
-                firstTweenObjectParams));
-            yield return StartCoroutine(TweenHelper.RectTweenAction(tweenableObj => SetCurrentPanelOffset(tweenableObj),
-                secondTweenObjectParams));
+            StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset, _firstTweenObjectParams));
+            yield return StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset,_secondTweenObjectParams));
 
             GestureRecognizer.Instance.IsSwipingEnabled = true;
             StopCoroutine(TweenHelper.RectTweenAction());
@@ -100,27 +99,23 @@ namespace InstaGen
             if (swipeData.SwipeDirection == SwipeDirection.Left && _currentRotatorIndex >= 0 &&
                 _currentRotatorIndex < _panelsCount - 1)
             {
-                firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
-                StartCoroutine(TweenHelper.RectTweenAction(tweenableObject => SetCurrentPanelOffset(tweenableObject),
-                    firstTweenObjectParams));
+                _firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
+                StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset, _firstTweenObjectParams));
 
                 ++_currentRotatorIndex;
-                secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
-                yield return StartCoroutine(TweenHelper.RectTweenAction(
-                    tweenableObject => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
+                _secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
+                yield return StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset, _secondTweenObjectParams));
             }
 
             if (swipeData.SwipeDirection == SwipeDirection.Right && _currentRotatorIndex > 0 &&
                 _currentRotatorIndex < _panelsCount)
             {
-                firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
-                StartCoroutine(TweenHelper.RectTweenAction(tweenableObject => SetCurrentPanelOffset(tweenableObject),
-                    firstTweenObjectParams));
+                _firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
+                StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset,_firstTweenObjectParams));
 
                 --_currentRotatorIndex;
-                secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
-                yield return StartCoroutine(TweenHelper.RectTweenAction(
-                    tweenableObject => SetCurrentPanelOffset(tweenableObject), secondTweenObjectParams));
+                _secondTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);
+                yield return StartCoroutine(TweenHelper.RectTweenAction( SetCurrentPanelOffset, _secondTweenObjectParams));
             }
 
             StopCoroutine(TweenHelper.RectTweenAction());

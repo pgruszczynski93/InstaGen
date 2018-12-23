@@ -12,9 +12,8 @@ namespace InstaGen
         [SerializeField] private bool _isScrollingPossible;
 
         [SerializeField] private Button _nextButton;
-        [SerializeField] private CanvasGroup _normalInputPanel;
         [SerializeField] private Button _previousButton;
-        [SerializeField] private CanvasGroup _rotatorInputPanel;
+        [SerializeField] private Button _nextPanelButton;
         [SerializeField] private RectTransform _scrollableElement;
         [SerializeField] private NoDragScrollRect _scrollRect;
 
@@ -38,7 +37,7 @@ namespace InstaGen
                 return;
             }
             
-            _scrollRect.onValueChanged.AddListener(bounds => TryToEnableScrollButtons(bounds));
+            _scrollRect.onValueChanged.AddListener(TryToEnableScrollButtons);
         }
 
         private void OnDisable()
@@ -48,7 +47,7 @@ namespace InstaGen
                 return;
             }
 
-            _scrollRect.onValueChanged.RemoveListener(bounds => TryToEnableScrollButtons(bounds));
+            _scrollRect.onValueChanged.RemoveListener(TryToEnableScrollButtons);
         }
 
         public void ScrollToNext()
@@ -104,6 +103,7 @@ namespace InstaGen
             float currY = bounds.y;
             _nextButton.gameObject.SetActive(currY > 0 && currY <= 1);
             _previousButton.gameObject.SetActive(currY >= 0 && currY < 1);
+            _nextPanelButton.gameObject.SetActive(currY == 0.0f);
         }
     }
 }
