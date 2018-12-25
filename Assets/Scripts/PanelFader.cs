@@ -20,8 +20,17 @@ namespace InstaGen
                     _parameters.inGroup.alpha = inAlpha;
                     _parameters.outGroup.alpha = outAlpha;
                 }, _parameters));
-            
+
             StopCoroutine(TweenHelper.AlphaTweenAction());
+            SetupInteracablePanel();
+        }
+
+        private void SetupInteracablePanel()
+        {
+            _parameters.inGroup.interactable = false;
+            _parameters.inGroup.blocksRaycasts = false;
+            _parameters.outGroup.interactable = true;
+            _parameters.outGroup.blocksRaycasts = true;
         }
     }
 }

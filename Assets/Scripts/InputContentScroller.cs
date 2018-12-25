@@ -19,6 +19,9 @@ namespace InstaGen
 
         [SerializeField] private float _scrollTime;
 
+        [SerializeField] private Text _debugText;
+        [SerializeField] private InputField _debugInput;
+
         private void SetButtons(bool isEnabled)
         {
             _nextButton.gameObject.SetActive(isEnabled);
@@ -112,5 +115,18 @@ namespace InstaGen
             _previousButton.gameObject.SetActive(currY == 0.0f);
             _nextPanelButton.gameObject.SetActive(currY == 0.0f);
         }
+
+        private void Update()
+        {
+            if (_debugInput.isFocused)
+            {
+                _debugText.text = string.Format("XXS: {0} {1}", TouchScreenKeyboard.visible, AndroidNativeHelper.GetKeyboardDisplayInfo());
+            }
+        }
+
+        private void ScrollInputPanel()
+        {
+        }
+        
     }
 }
