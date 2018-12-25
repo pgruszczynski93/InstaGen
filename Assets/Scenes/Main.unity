@@ -209,19 +209,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 228078186}
-        m_MethodName: ScrollToNext
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 228078188}
-        m_MethodName: SetNextToggle
+      - m_Target: {fileID: 256263014}
+        m_MethodName: ScrollVerticallyToNext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1046,11 +1035,10 @@ GameObject:
   - component: {fileID: 228078183}
   - component: {fileID: 228078185}
   - component: {fileID: 228078184}
-  - component: {fileID: 228078186}
   - component: {fileID: 228078187}
   - component: {fileID: 228078188}
   m_Layer: 5
-  m_Name: InputPanel
+  m_Name: InputPanelRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1110,67 +1098,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 228078182}
   m_CullTransparentMesh: 0
---- !u!114 &228078186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 228078182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c292cdada1b996249a3466c5ade64cd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.35199594
-      value: 0.17205445
-      inSlope: 1.5345647
-      outSlope: 1.5345647
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7507474
-      value: 0.86313075
-      inSlope: 0.9421272
-      outSlope: 0.9421272
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _isScrollingPossible: 1
-  _nextButton: {fileID: 49082645}
-  _previousButton: {fileID: 1046081929}
-  _nextPanelButton: {fileID: 495867547}
-  _scrollableElement: {fileID: 1663230793}
-  _scrollRect: {fileID: 193276165}
-  _scrollTime: 0.5
-  _debugText: {fileID: 1472572788}
 --- !u!114 &228078187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,8 +1148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb718f12ca85f84896eeb355bbda730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toggleIndex: 0
-  _toggleCount: 0
   _sideToggles:
   - {fileID: 1613145644}
   - {fileID: 561228918}
@@ -1240,8 +1165,9 @@ GameObject:
   m_Component:
   - component: {fileID: 256263012}
   - component: {fileID: 256263013}
+  - component: {fileID: 256263014}
   m_Layer: 5
-  m_Name: RotatorInput
+  m_Name: RotatorInputPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,6 +1206,66 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &256263014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 256263011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c292cdada1b996249a3466c5ade64cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isScrollingPossible: 1
+  _scrollTime: 0.5
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35199594
+      value: 0.17205445
+      inSlope: 1.5345647
+      outSlope: 1.5345647
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7507474
+      value: 0.86313075
+      inSlope: 0.9421272
+      outSlope: 0.9421272
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scrollableContent: {fileID: 1663230793}
+  _nextButton: {fileID: 49082645}
+  _previousButton: {fileID: 1046081929}
+  _nextPanelButton: {fileID: 495867547}
+  _scrollRect: {fileID: 193276165}
 --- !u!1 &267197643 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1937043994360774, guid: 6263a179990ee234d8708838524fde55,
@@ -2335,19 +2321,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 228078186}
-        m_MethodName: ScrollToPrevious
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 228078188}
-        m_MethodName: SetPreviousToggle
+      - m_Target: {fileID: 256263014}
+        m_MethodName: ScrollVerticallyToPrevious
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2479,7 +2454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1055892766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3241,7 +3216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.87000006, y: 0.27600002}
   m_AnchorMax: {x: 1, y: 0.6252559}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1236731573
@@ -4713,7 +4688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1765984503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5359,7 +5334,7 @@ GameObject:
   - component: {fileID: 1928705811}
   - component: {fileID: 1928705812}
   m_Layer: 5
-  m_Name: NormalInput
+  m_Name: NormalInputPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,6 +15,7 @@ namespace InstaGen
 
         private IEnumerator ChangePanelRoutine()
         {
+            SetupInteracablePanel();
             yield return StartCoroutine(TweenHelper.AlphaTweenAction((inAlpha, outAlpha) =>
                 {
                     _parameters.inGroup.alpha = inAlpha;
@@ -22,7 +23,6 @@ namespace InstaGen
                 }, _parameters));
 
             StopCoroutine(TweenHelper.AlphaTweenAction());
-            SetupInteracablePanel();
         }
 
         private void SetupInteracablePanel()

@@ -15,6 +15,10 @@
           <e p="Enums.cs" t="Include" />
           <e p="GestureRecognizer.cs" t="Include" />
           <e p="InputContentScroller.cs" t="Include" />
+          <e p="InputFieldsController.cs" t="Include" />
+          <e p="InputPanelScroller.cs" t="Include" />
+          <e p="InputScroller.cs" t="Include" />
+          <e p="IScrollContentVertical.cs" t="Include" />
           <e p="MenuRotator.cs" t="Include" />
           <e p="NoDragScrollRect.cs" t="Include" />
           <e p="PanelFader.cs" t="Include" />

@@ -7,40 +7,54 @@ namespace InstaGen
 {
 	public class ToggleSwitcher : MonoBehaviour
 	{
-		[SerializeField] private int _toggleIndex;
-		[SerializeField] private int _toggleCount;
 		[SerializeField] private Toggle[] _sideToggles;
+
+		private int _toggleCount;
 
 		private void SetReferences()
 		{
 			_toggleCount = _sideToggles.Length;
 		}
 
-		private void Start()
+		private void Awake()
 		{
 			SetReferences();
 		}
 
-		public void SetNextToggle()
+		private void OnEnable()
 		{
-			if (_toggleIndex > _toggleCount - 1)
-			{
-				return;
-			}
-		
-			_sideToggles[_toggleIndex].isOn = false;
-			_sideToggles[++_toggleIndex].isOn = true;
+			InputScroller.OnScrollVerticalToNext += ScrollToNext;
+			InputScroller.OnScrollVerticalToPrevious += ScrollToPrevious;
 		}
 
-		public void SetPreviousToggle()
+		private void OnDisable()
 		{
-			if (_toggleIndex < 1)
+			InputScroller.OnScrollVerticalToNext -= ScrollToNext;
+			InputScroller.OnScrollVerticalToPrevious -= ScrollToPrevious;
+
+		}
+
+		private void ScrollToNext()
+		{
+			if (InputContentScroller.VerticalContentScrollIndex > _toggleCount - 1)
 			{
 				return;
 			}
 			
-			_sideToggles[_toggleIndex].isOn = false;
-			_sideToggles[--_toggleIndex].isOn = true;
+			_sideToggles[InputContentScroller.VerticalContentScrollIndex].isOn = false;
+			_sideToggles[++InputContentScroller.VerticalContentScrollIndex].isOn = true;
 		}
+		private void ScrollToPrevious()
+		{
+			if (InputContentScroller.VerticalContentScrollIndex < 1)
+			{
+				return;
+			}
+			
+			_sideToggles[InputContentScroller.VerticalContentScrollIndex].isOn = false;
+			_sideToggles[--InputContentScroller.VerticalContentScrollIndex].isOn = true;
+		}
+
+
 	}
 }
