@@ -24,6 +24,22 @@ namespace InstaGen
 
         protected virtual void SetupInitialReferences(){}
 
+        protected virtual void ScrollToNext()
+        {
+            if (_scrollableContent == null)
+            {
+                return;
+            }
+        }
+
+        protected virtual void ScrollToPrevious()
+        {
+            if (_scrollableContent == null)
+            {
+                return;
+            }
+        }
+
         public void ScrollVerticallyToNext()
         {
             if (OnScrollVerticalToNext != null)

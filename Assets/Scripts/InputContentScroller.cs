@@ -56,23 +56,15 @@ namespace InstaGen
             _nextPanelButton.gameObject.SetActive(currY == 0.0f);
         }
         
-        private void ScrollToNext()
+        protected override void ScrollToNext()
         {
-            if (_scrollableContent == null)
-            {
-                return;
-            }
-            
+            base.ScrollToNext();            
             StartCoroutine(ScrollContent(SwipeDirection.Down));
         }
 
-        private void ScrollToPrevious()
+        protected override void ScrollToPrevious()
         {
-            if (_scrollableContent == null)
-            {
-                return;
-            }
-            
+            base.ScrollToPrevious();            
             StartCoroutine(ScrollContent(SwipeDirection.Up));
         }
 

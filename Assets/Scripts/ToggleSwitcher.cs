@@ -31,7 +31,6 @@ namespace InstaGen
 		{
 			InputScroller.OnScrollVerticalToNext -= ScrollToNext;
 			InputScroller.OnScrollVerticalToPrevious -= ScrollToPrevious;
-
 		}
 
 		private void ScrollToNext()

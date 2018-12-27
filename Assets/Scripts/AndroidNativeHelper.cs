@@ -33,8 +33,9 @@ namespace InstaGen
 #else
         return new DisplayKeyboardInfo
         {
-            keyboardHeight = 0,
-            keyboardRatio = 0
+            // 500 is debug value!!!
+            keyboardHeight = 500,
+            keyboardRatio = 500
         };
 #endif
         }
