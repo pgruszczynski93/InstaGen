@@ -18,6 +18,11 @@ namespace InstaGen
 		
 		[SerializeField] private Text text;
 
+		private void OnEnable()
+		{
+			text.text = "Free space " + AndroidNativeHelper.GetFreeSpace() + " mbs left";
+		}
+
 		public void ScrollUpPanel(string tempString="")
 		{
 			if (_isHeightValueCached)

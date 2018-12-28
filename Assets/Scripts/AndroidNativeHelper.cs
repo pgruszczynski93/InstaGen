@@ -39,6 +39,31 @@ namespace InstaGen
         };
 #endif
         }
+
+        public static string GetFreeSpace()
+        {
+            #if UNITY_ANDROID && !UNITY_EDITOR
+            using (AndroidJavaClass jc = new AndroidJavaClass("android.os.Environment"))
+            {
+                using (AndroidJavaObject file = jc.CallStatic<AndroidJavaObject>("getDataDirectory"))
+                {
+                    string path = file.Call<string>("getAbsolutePath");
+
+                    using (AndroidJavaObject stat = new AndroidJavaObject("android.os.StatFs", path))
+                    {
+                        long blocks = stat.Call<long>("getAvailableBlocksLong");
+                        long blockSize = stat.Call<long>("getBlockSizeLong");
+
+                        return ((float)(blocks * blockSize)/(1024*1024)).ToString();
+                    }
+                }
+            }
+            #else
+            
+            return "[editor mode - no info]";
+            
+            #endif
+        }
     }
 
 }
