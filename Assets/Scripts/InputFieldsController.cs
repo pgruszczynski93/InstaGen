@@ -17,7 +17,6 @@ namespace InstaGen
 			foreach (TMP_InputField field in _inputFields)
 			{
 				field.onSelect.AddListener(_inputPanelScroller.ScrollUpPanel);
-				field.onDeselect.AddListener(_inputPanelScroller.ScrollDownPanel);
 				field.onValueChanged.AddListener(GetUserInput);
 			}
 		}
@@ -33,6 +32,16 @@ namespace InstaGen
 		public TMP_InputField CurrentInputField
 		{
 			get { return _inputFields[InputContentScroller.VerticalContentScrollIndex]; }
+		}
+
+		public void EnableInputField(string tempString)
+		{
+			CurrentInputField.interactable = true;
+		}
+
+		public void DisableInputField(string tempString)
+		{
+			CurrentInputField.interactable = false;
 		}
 
 		public bool IsPanelScrollPossible

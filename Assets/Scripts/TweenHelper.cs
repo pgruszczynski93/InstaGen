@@ -17,6 +17,11 @@ namespace InstaGen
             this.propertyVector1 = propertyVector1;
             this.propertyVector2 = propertyVector2;
         }
+
+        public override string ToString()
+        {
+            return string.Format("1.(x,y) = {0}, 2.(x,y) = {1}", propertyVector1, propertyVector2);
+        }
     }
 
     [Serializable]

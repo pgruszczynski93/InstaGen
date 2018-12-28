@@ -1280,8 +1280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c890851ce983ff344b85ebf7556e6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isScrollingPossible: 0
-  _scrollTime: 0.2
+  _isScrollingPossible: 1
+  _scrollTime: 0.5
   _animationCurve:
     serializedVersion: 2
     m_Curve:
