@@ -14,7 +14,19 @@ namespace InstaGen
 		
 		private DisplayKeyboardInfo _keyboardInfo;
 		private RectTweenParameters _verticalTweenObjectParam = new RectTweenParameters();
-		
+
+//		private void OnEnable()
+//		{
+//			EventsHelper.OnInputPanelScrollFinished += ScrollDownPanel;
+//		}
+//
+//		private void OnDisable()
+//		{
+//			EventsHelper.OnInputPanelScrollFinished -= ScrollDownPanel;
+//		}
+//		
+//		
+
 		public void ScrollUpPanel(string tempString="")
 		{
 			if (_isHeightValueCached)
@@ -25,6 +37,11 @@ namespace InstaGen
 			StartCoroutine(ScrollMovementAnimation(MoveDirection.Up));
 		}
 
+		private void ScrollDownPanel()
+		{
+			StartCoroutine(ScrollMovementAnimation(MoveDirection.Down));
+		}
+		
 		private void SetupScrollHeightToKeyboard()
 		{
 			_maxPanelHeight = (int)(Screen.height*0.9f /4);
@@ -53,7 +70,8 @@ namespace InstaGen
 		
 		protected override IEnumerator ScrollMovementAnimation(MoveDirection direction)
 		{
-			_verticalTweenObjectParam = InitializeParametersForOffset(_scrollableContent, _upAlignment);
+			Vector2 moveDir = direction == MoveDirection.Up ? _upAlignment : -_upAlignment;
+			_verticalTweenObjectParam = InitializeParametersForOffset(_scrollableContent, moveDir);
 			
 			yield return StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset, _verticalTweenObjectParam));
 			StopCoroutine(TweenHelper.RectTweenAction());

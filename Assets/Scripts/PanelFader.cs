@@ -8,7 +8,17 @@ namespace InstaGen
     {
         [SerializeField] private AlphaTweenParameters _parameters;
 
-        public void ChangePanel()
+        private void OnEnable()
+        {
+            EventsHelper.OnInputPanelScrollFinished += ChangePanel;
+        }
+
+        private void OnDisable()
+        {
+            EventsHelper.OnInputPanelScrollFinished -= ChangePanel;
+        }
+
+        private void ChangePanel()
         {
             StartCoroutine(ChangePanelRoutine());
         }

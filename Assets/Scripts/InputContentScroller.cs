@@ -36,7 +36,14 @@ namespace InstaGen
             EventsHelper.OnScroll -= ScrollObject;
             _scrollRect.onValueChanged.RemoveListener(TryToEnableScrollButtons);
         }
-        
+
+        public void InvokeNextPanelGroup()
+        {
+            if (EventsHelper.OnInputPanelScrollFinished != null)
+            {
+                EventsHelper.OnInputPanelScrollFinished();
+            }
+        }
 
         private void TryToEnableScrollButtons(Vector2 bounds)
         {

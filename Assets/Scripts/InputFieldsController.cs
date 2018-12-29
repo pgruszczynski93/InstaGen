@@ -8,30 +8,40 @@ namespace InstaGen
 	public class InputFieldsController : MonoBehaviour
 	{
 		private bool _isPanelScrollPossible;
+		private int _inputCount;
 		
 		[SerializeField] private InputPanelScroller _inputPanelScroller;
-		[SerializeField] private TMP_InputField[] _inputFields;
+		[SerializeField] private TMP_InputField[] _scrollingInputFields;
+		[SerializeField] private TMP_InputField[] _normalInputFields;
 
+		private void Start()
+		{
+			_inputCount = _scrollingInputFields.Length;
+		}
+		
 		private void OnEnable()
 		{
-			foreach (TMP_InputField field in _inputFields)
+			EventsHelper.OnInputPanelScrollFinished += CopyUserInput;			
+
+			for(int i=0; i<_inputCount; i++)
 			{
-				field.onSelect.AddListener(_inputPanelScroller.ScrollUpPanel);
-				field.onValueChanged.AddListener(GetUserInput);
+				_scrollingInputFields[i].onSelect.AddListener(_inputPanelScroller.ScrollUpPanel);
 			}
 		}
 
 		private void OnDisable()
 		{
-			foreach (TMP_InputField field in _inputFields)
+			EventsHelper.OnInputPanelScrollFinished -= CopyUserInput;			
+
+			for(int i=0; i<_inputCount; i++)
 			{
-				field.onSelect.RemoveAllListeners();
+				_scrollingInputFields[i].onSelect.RemoveAllListeners();
 			}
 		}
 		
 		public TMP_InputField CurrentInputField
 		{
-			get { return _inputFields[InputContentScroller.VerticalContentScrollIndex]; }
+			get { return _scrollingInputFields[InputContentScroller.VerticalContentScrollIndex]; }
 		}
 
 		public void EnableInputField(string tempString)
@@ -49,9 +59,12 @@ namespace InstaGen
 			get { return _isPanelScrollPossible; }
 		}
 
-		public void GetUserInput(string userInput)
+		private void CopyUserInput()
 		{
-			print("Dupax xsdafkdfmd");
+			for(int i=0; i<_inputCount; i++)
+			{
+				_normalInputFields[i].text = _scrollingInputFields[i].text;
+			}
 		}
 	}
 }
