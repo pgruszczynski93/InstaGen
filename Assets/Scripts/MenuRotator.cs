@@ -24,16 +24,16 @@ namespace InstaGen
 
         private void OnEnable()
         {
-            GestureRecognizer.Instance.OnSwipeEnabled += InitialRotatorAnimation;
-            GestureRecognizer.Instance.OnSwipe += PlayRotatorAnimation;
-            GestureRecognizer.Instance.OnSwipe += Debug_RotatorDirectionInfo;
+            EventsHelper.OnSwipeEnabled += InitialRotatorAnimation;
+            EventsHelper.OnSwipe += PlayRotatorAnimation;
+            EventsHelper.OnSwipe += Debug_RotatorDirectionInfo;
         }
 
         private void OnDisable()
         {
-            GestureRecognizer.Instance.OnSwipeEnabled -= InitialRotatorAnimation;
-            GestureRecognizer.Instance.OnSwipe -= PlayRotatorAnimation;
-            GestureRecognizer.Instance.OnSwipe -= Debug_RotatorDirectionInfo;
+            EventsHelper.OnSwipeEnabled -= InitialRotatorAnimation;
+            EventsHelper.OnSwipe -= PlayRotatorAnimation;
+            EventsHelper.OnSwipe -= Debug_RotatorDirectionInfo;
         }
 
         private void Start()
@@ -58,7 +58,7 @@ namespace InstaGen
 
         private void Debug_RotatorDirectionInfo(SwipeData swipeData)
         {
-            Debug.Log(string.Format("[Menu Rotator] Direction: {0}", swipeData.SwipeDirection));
+            Debug.Log(string.Format("[Menu Rotator] Direction: {0}", swipeData.moveDirection));
         }
 
         private RectTweenParameters InitializeParametersForOffset(RectTransform panel, Vector2 alignment)
@@ -96,7 +96,7 @@ namespace InstaGen
         {
             GestureRecognizer.Instance.IsSwipingEnabled = false;
 
-            if (swipeData.SwipeDirection == SwipeDirection.Left && _currentRotatorIndex >= 0 &&
+            if (swipeData.moveDirection == MoveDirection.Left && _currentRotatorIndex >= 0 &&
                 _currentRotatorIndex < _panelsCount - 1)
             {
                 _firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _leftAlignment);
@@ -107,7 +107,7 @@ namespace InstaGen
                 yield return StartCoroutine(TweenHelper.RectTweenAction(SetCurrentPanelOffset, _secondTweenObjectParams));
             }
 
-            if (swipeData.SwipeDirection == SwipeDirection.Right && _currentRotatorIndex > 0 &&
+            if (swipeData.moveDirection == MoveDirection.Right && _currentRotatorIndex > 0 &&
                 _currentRotatorIndex < _panelsCount)
             {
                 _firstTweenObjectParams = InitializeParametersForOffset(_panels[_currentRotatorIndex], _rightAlignment);

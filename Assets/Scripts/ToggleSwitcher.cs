@@ -23,17 +23,31 @@ namespace InstaGen
 
 		private void OnEnable()
 		{
-			InputScroller.OnScrollVerticalToNext += ScrollToNext;
-			InputScroller.OnScrollVerticalToPrevious += ScrollToPrevious;
+			EventsHelper.OnScroll += UpdateToggles;
 		}
 
 		private void OnDisable()
 		{
-			InputScroller.OnScrollVerticalToNext -= ScrollToNext;
-			InputScroller.OnScrollVerticalToPrevious -= ScrollToPrevious;
+			EventsHelper.OnScroll += UpdateToggles;
 		}
 
-		private void ScrollToNext()
+		private void UpdateToggles(MoveDirection direction)
+		{
+			switch (direction)
+			{
+				case MoveDirection.Up:
+					EnablePreviousToggle();
+					break;
+				case MoveDirection.Down:
+					EnableNextToggle();
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		private void EnableNextToggle()
 		{
 			if (InputContentScroller.VerticalContentScrollIndex > _toggleCount - 1)
 			{
@@ -43,7 +57,8 @@ namespace InstaGen
 			_sideToggles[InputContentScroller.VerticalContentScrollIndex].isOn = false;
 			_sideToggles[++InputContentScroller.VerticalContentScrollIndex].isOn = true;
 		}
-		private void ScrollToPrevious()
+		
+		private void EnablePreviousToggle()
 		{
 			if (InputContentScroller.VerticalContentScrollIndex < 1)
 			{

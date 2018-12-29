@@ -27,17 +27,13 @@ namespace InstaGen
 
         private void OnEnable()
         {
-            OnScrollVerticalToNext += ScrollToNext;
-            OnScrollVerticalToPrevious += ScrollToPrevious;
-            
+            EventsHelper.OnScroll += ScrollObject;
             _scrollRect.onValueChanged.AddListener(TryToEnableScrollButtons);
         }
 
         private void OnDisable()
         {
-            OnScrollVerticalToNext -= ScrollToNext;
-            OnScrollVerticalToPrevious -= ScrollToPrevious;
-
+            EventsHelper.OnScroll -= ScrollObject;
             _scrollRect.onValueChanged.RemoveListener(TryToEnableScrollButtons);
         }
         
@@ -56,21 +52,15 @@ namespace InstaGen
             _nextPanelButton.gameObject.SetActive(currY == 0.0f);
         }
         
-        protected override void ScrollToNext()
+        protected override void ScrollObject(MoveDirection direction)
         {
-            base.ScrollToNext();            
-            StartCoroutine(ScrollContent(SwipeDirection.Down));
+            base.ScrollObject(direction);            
+            StartCoroutine(ScrollMovementAnimation(direction));
         }
 
-        protected override void ScrollToPrevious()
+        protected override IEnumerator ScrollMovementAnimation(MoveDirection direction)
         {
-            base.ScrollToPrevious();            
-            StartCoroutine(ScrollContent(SwipeDirection.Up));
-        }
-
-        protected override IEnumerator ScrollContent(SwipeDirection direction)
-        {
-            float scrollDirection = direction == SwipeDirection.Up ? _scrollStep * -1 : _scrollStep;
+            float scrollDirection = direction == MoveDirection.Up ? _scrollStep * -1 : _scrollStep;
 
             Vector2 scrollAnchoredPos = _scrollableContent.anchoredPosition;
             RectTweenableObject tweenableObjectStart =

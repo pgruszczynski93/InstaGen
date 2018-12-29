@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace InstaGen
 {
-    public class InputScroller : MonoBehaviour, IScrollContentVertical {
+    public class InputScroller : MonoBehaviour {
 
         protected int _scrollStep; //modify when necessary
 
@@ -14,8 +14,6 @@ namespace InstaGen
         [SerializeField] protected AnimationCurve _animationCurve;
         [SerializeField] protected RectTransform _scrollableContent;
         
-        public static Action OnScrollVerticalToNext = delegate {  };
-        public static Action OnScrollVerticalToPrevious = delegate {  };
         
         protected virtual void Start()
         {
@@ -24,7 +22,7 @@ namespace InstaGen
 
         protected virtual void SetupInitialReferences(){}
 
-        protected virtual void ScrollToNext()
+        protected virtual void ScrollObject(MoveDirection direction)
         {
             if (_scrollableContent == null)
             {
@@ -32,31 +30,25 @@ namespace InstaGen
             }
         }
 
-        protected virtual void ScrollToPrevious()
+        private void StartScrollMovement(MoveDirection direction)
         {
-            if (_scrollableContent == null)
+            if (EventsHelper.OnScroll != null)
             {
-                return;
+                EventsHelper.OnScroll(direction);
             }
         }
 
-        public void ScrollVerticallyToNext()
+        public void ScrollVerticallyUp()
         {
-            if (OnScrollVerticalToNext != null)
-            {
-                OnScrollVerticalToNext();
-            }
+            StartScrollMovement(MoveDirection.Up);
         }
 
-        public void ScrollVerticallyToPrevious()
+        public void ScrollVerticallyDown()
         {
-            if (OnScrollVerticalToPrevious != null)
-            {
-                OnScrollVerticalToPrevious();
-            }
+            StartScrollMovement(MoveDirection.Down);
         }
-        
-        protected virtual IEnumerator ScrollContent(SwipeDirection direction)
+
+        protected virtual IEnumerator ScrollMovementAnimation(MoveDirection direction)
         {
             yield return null;
         }

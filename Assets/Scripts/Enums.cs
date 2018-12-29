@@ -1,8 +1,9 @@
 ﻿namespace InstaGen
 {
-    public enum SwipeDirection
+    [System.Serializable]
+    public enum MoveDirection
     {
-        NoSwipe,
+        NoMovement,
         Left,
         Right,
         Up,

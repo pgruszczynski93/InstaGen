@@ -210,7 +210,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 256263014}
-        m_MethodName: ScrollVerticallyToNext
+        m_MethodName: ScrollVerticallyDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1325,7 +1325,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _scrollableContent: {fileID: 256263012}
-  text: {fileID: 1213724700}
 --- !u!114 &256263016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,7 +2413,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 256263014}
-        m_MethodName: ScrollVerticallyToPrevious
+        m_MethodName: ScrollVerticallyUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

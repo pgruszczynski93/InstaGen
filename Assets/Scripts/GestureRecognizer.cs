@@ -7,7 +7,7 @@ namespace InstaGen
     {
         public Vector2 SwipeStartPos;
         public Vector2 SwipeEndPos;
-        public SwipeDirection SwipeDirection;
+        public MoveDirection moveDirection;
     }
 
     public class GestureRecognizer : MonoBehaviour
@@ -17,8 +17,6 @@ namespace InstaGen
         [SerializeField] private Vector2 _touchBeginPos;
         [SerializeField] private Vector2 _touchEndPos;
 
-        public Action OnSwipeEnabled = delegate { };
-
         static GestureRecognizer()
         {
             Instance = null;
@@ -27,8 +25,6 @@ namespace InstaGen
         public bool IsSwipingEnabled { get; set; }
 
         public static GestureRecognizer Instance { get; private set; }
-
-        public event Action<SwipeData> OnSwipe = delegate { };
 
         private void Awake()
         {
@@ -49,7 +45,10 @@ namespace InstaGen
 
         public void EnableSwipping()
         {
-            OnSwipeEnabled();
+            if (EventsHelper.OnSwipeEnabled != null)
+            {
+                EventsHelper.OnSwipeEnabled();
+            }
         }
 
         private void CollectTouchInput()
@@ -87,15 +86,15 @@ namespace InstaGen
                 return;
             }
         
-            SwipeDirection direction = SwipeDirection.NoSwipe;
+            MoveDirection direction = MoveDirection.NoMovement;
             
             if (IsHorizontalSwipeDetected())
             {
-                direction = _touchEndPos.x > _touchBeginPos.x ? SwipeDirection.Right : SwipeDirection.Left;
+                direction = _touchEndPos.x > _touchBeginPos.x ? MoveDirection.Right : MoveDirection.Left;
             }
             else
             {
-                direction = _touchEndPos.y > _touchBeginPos.y ? SwipeDirection.Up : SwipeDirection.Down;
+                direction = _touchEndPos.y > _touchBeginPos.y ? MoveDirection.Up : MoveDirection.Down;
             }
 
             SendSwipe(direction);
@@ -123,16 +122,20 @@ namespace InstaGen
             return Math.Abs(_touchEndPos.x - _touchBeginPos.x);
         }
 
-        private void SendSwipe(SwipeDirection direction)
+        private void SendSwipe(MoveDirection direction)
         {
             SwipeData swipeData = new SwipeData
             {
-                SwipeDirection = direction,
+                moveDirection = direction,
                 SwipeStartPos = _touchBeginPos,
                 SwipeEndPos = _touchEndPos
             };
 
-            OnSwipe(swipeData);
+
+            if (EventsHelper.OnSwipe != null)
+            {
+                EventsHelper.OnSwipe(swipeData);
+            }
         }
     }
 }
