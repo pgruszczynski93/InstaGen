@@ -15,7 +15,7 @@ namespace InstaGen
 			EventsHelper.OnApplicationExit -= ExitApp;
 		}
 
-		void Update ()
+		private	void Update ()
 		{
 			if (EventsHelper.OnApplicationExit != null)
 			{
@@ -23,7 +23,7 @@ namespace InstaGen
 			}
 		}
 
-		void ExitApp()
+		private void ExitApp()
 		{
 			if (Input.GetKey(KeyCode.Escape))
 			{
