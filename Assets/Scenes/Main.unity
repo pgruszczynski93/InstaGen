@@ -3981,6 +3981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1486659898}
   - component: {fileID: 1486659900}
+  - component: {fileID: 1486659901}
   - component: {fileID: 1486659899}
   m_Layer: 0
   m_Name: '[APP_MANAGER]'
@@ -4040,6 +4041,17 @@ MonoBehaviour:
   _minSwipeDistance: 100
   _touchBeginPos: {x: 0, y: 0}
   _touchEndPos: {x: 0, y: 0}
+--- !u!114 &1486659901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1486659897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2304f3d2a87754fb1e3743b0d4fdb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1557295945
 GameObject:
   m_ObjectHideFlags: 0
