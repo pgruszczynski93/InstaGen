@@ -40,29 +40,34 @@ namespace InstaGen
 #endif
         }
 
-        public static string GetFreeSpace()
+        public static float GetFreeSpace()
         {
-            #if UNITY_ANDROID && !UNITY_EDITOR
-            using (AndroidJavaClass jc = new AndroidJavaClass("android.os.Environment"))
+            float freeMegabytes = -1.0f;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            try
             {
-                using (AndroidJavaObject file = jc.CallStatic<AndroidJavaObject>("getDataDirectory"))
+                using (AndroidJavaClass environment = new AndroidJavaClass("android.os.Environment"))
                 {
-                    string path = file.Call<string>("getAbsolutePath");
-
-                    using (AndroidJavaObject stat = new AndroidJavaObject("android.os.StatFs", path))
+                    using (AndroidJavaObject file = environment.CallStatic<AndroidJavaObject>("getDataDirectory"))
                     {
-                        long blocks = stat.Call<long>("getAvailableBlocksLong");
-                        long blockSize = stat.Call<long>("getBlockSizeLong");
+                        string path = file.Call<string>("getAbsolutePath");
 
-                        return ((float)(blocks * blockSize)/(1024*1024)).ToString();
+                        using (AndroidJavaObject statistics = new AndroidJavaObject("android.os.StatFs", path))
+                        {
+                            long blocks = statistics.Call<long>("getAvailableBlocksLong");
+                            long blockSize = statistics.Call<long>("getBlockSizeLong");
+
+                            freeMegabytes = (blocks * blockSize) / (1024.0f * 1024.0f);
+                        }
                     }
                 }
             }
-            #else
-            
-            return "[editor mode - no info]";
-            
-            #endif
+            catch (System.Exception exception)
+            {
+                Debug.Log(string.Format("Error occurs when trying to get free internal memory: {0}",exception.Message));
+            }
+#endif
+            return freeMegabytes;
         }
     }
 
