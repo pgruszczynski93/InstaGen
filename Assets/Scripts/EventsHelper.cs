@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace InstaGen
 {
@@ -10,5 +11,6 @@ namespace InstaGen
 		
 		public static Action<MoveDirection> OnScroll = delegate {  };
 		public static Action<SwipeData> OnSwipe = delegate { };
+		public static Action<Vector2> OnObjectDrag = delegate { }; 
 	}
 }

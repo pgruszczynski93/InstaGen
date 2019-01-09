@@ -10,6 +10,7 @@
         <e p="Scripts" t="Include">
           <e p="AndroidNativeHelper.cs" t="Include" />
           <e p="AppManager.cs" t="Include" />
+          <e p="ClipboardSender.cs" t="Include" />
           <e p="Editor" t="Include">
             <e p="HideInSubClassAttributeDrawer.cs" t="Include" />
           </e>

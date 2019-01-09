@@ -69,6 +69,32 @@ namespace InstaGen
 #endif
             return freeMegabytes;
         }
+
+        public static void CopyTextToClipboard(string outPutString)
+        {
+            
+#if UNITY_ANDROID && !UNITY_EDITOR
+            try
+            {
+                
+                using (AndroidJavaClass clipboardLibrary =
+                    new AndroidJavaClass("com.mindwalkerstudio.clipboardsupportlibrary.ClipboardPaster"))
+                using(AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+                {
+
+                    using (AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
+                    using (AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext"))
+                    {
+                        clipboardLibrary.CallStatic("pasteTextToClipboard",context, outPutString);
+                    }
+                }                
+            }
+            catch (System.Exception exception)
+            {
+                Debug.Log(string.Format("Error occurs when trying to get free internal memory: {0}",exception.Message));
+            }
+#endif
+        }
     }
 
 }

@@ -14,7 +14,7 @@ namespace InstaGen
 		[SerializeField] private TMP_InputField[] _scrollingInputFields;
 		[SerializeField] private TMP_InputField[] _normalInputFields;
 
-		private void Start()
+		private void Awake()
 		{
 			_inputCount = _scrollingInputFields.Length;
 		}
