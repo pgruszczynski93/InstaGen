@@ -9,7 +9,6 @@ namespace InstaGen
 	public class ClipboardSender : MonoBehaviour {
 		
 		[SerializeField] TMP_InputField _summaryInputField;
-		[SerializeField] private Text testText;
 
 		public void PasteToClipboard()
 		{

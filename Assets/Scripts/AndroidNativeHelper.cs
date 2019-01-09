@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace InstaGen
 {
@@ -10,7 +8,7 @@ namespace InstaGen
         public float keyboardRatio;
     }
 
-    public class AndroidNativeHelper : MonoBehaviour {
+    public class AndroidNativeHelper {
 
         public static DisplayKeyboardInfo GetKeyboardDisplayInfo()
         {
@@ -70,7 +68,7 @@ namespace InstaGen
             return freeMegabytes;
         }
 
-        public static void CopyTextToClipboard(string outPutString)
+        public static void CopyTextToClipboard(string stringToPaste)
         {
             
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -85,13 +83,13 @@ namespace InstaGen
                     using (AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
                     using (AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext"))
                     {
-                        clipboardLibrary.CallStatic("pasteTextToClipboard",context, outPutString);
+                        clipboardLibrary.CallStatic("pasteTextToClipboard",context, stringToPaste);
                     }
                 }                
             }
             catch (System.Exception exception)
             {
-                Debug.Log(string.Format("Error occurs when trying to get free internal memory: {0}",exception.Message));
+                Debug.Log(string.Format("Error occurs when trying to paste to clipboard",exception.Message));
             }
 #endif
         }

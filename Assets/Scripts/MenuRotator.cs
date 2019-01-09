@@ -24,9 +24,9 @@ namespace InstaGen
 
         private void OnEnable()
         {
-            //EventsHelper.OnSwipeEnabled += InitialRotatorAnimation;
-            //EventsHelper.OnSwipe += PlayRotatorAnimation;
-            //EventsHelper.OnSwipe += Debug_RotatorDirectionInfo;
+            EventsHelper.OnSwipeEnabled += InitialRotatorAnimation;
+            EventsHelper.OnSwipe += PlayRotatorAnimation;
+            EventsHelper.OnSwipe += Debug_RotatorDirectionInfo;
         }
 
         private void OnDisable()
