@@ -9,4 +9,10 @@
         Up,
         Down
     }
+
+    public enum HashtagButtonStatus
+    {
+        Used,
+        Available
+    }
 }

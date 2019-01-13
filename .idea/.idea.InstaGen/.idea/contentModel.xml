@@ -16,7 +16,12 @@
           </e>
           <e p="Enums.cs" t="Include" />
           <e p="EventsHelper.cs" t="Include" />
+          <e p="FPSDisplay.cs" t="Include" />
           <e p="GestureRecognizer.cs" t="Include" />
+          <e p="HashtagButton.cs" t="Include" />
+          <e p="HashtagExitButtonBehaviour.cs" t="Include" />
+          <e p="HashtagObjectsManager.cs" t="Include" />
+          <e p="HashtagPanelManager.cs" t="Include" />
           <e p="InputContentScroller.cs" t="Include" />
           <e p="InputFieldsController.cs" t="Include" />
           <e p="InputPanelScroller.cs" t="Include" />
