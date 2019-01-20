@@ -31,7 +31,8 @@ namespace InstaGen
 
 		public void ParentToUsedPanel()
 		{
-			ChangeParent(_usedParent, HashtagButtonStatus.Used, true);
+			//uncomment it later
+			//	ChangeParent(_usedParent, HashtagButtonStatus.Used, true);
 		}
 
 		public void ParentToAvailablePanel()

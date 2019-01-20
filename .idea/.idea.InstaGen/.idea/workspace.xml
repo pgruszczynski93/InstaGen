@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="258a5f1e-c667-4449-a89d-a521f0c34ee9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaGen/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaGen/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.InstaGen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.InstaGen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HashtagPanel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HashtagPanel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +21,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
+            <state relative-caret-position="120">
               <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
               <folding>
                 <marker date="1547396985254" expanded="false" signature="6:32" ph="..." />
@@ -36,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/AndroidNativeHelper.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
+            <state relative-caret-position="1080">
               <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
               <folding>
                 <marker date="1547069856247" expanded="true" signature="38:3767" ph="{...}" />
@@ -51,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagObjectsManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="62" column="60" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
+            <state relative-caret-position="380">
+              <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
               <folding>
                 <marker date="1547400184037" expanded="false" signature="6:107" ph="..." />
                 <marker date="1547400184037" expanded="true" signature="127:2106" ph="{...}" />
@@ -78,16 +77,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+            <state>
+              <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
               <folding>
-                <marker date="1547399027346" expanded="true" signature="6:113" ph="..." />
-                <marker date="1547399027346" expanded="true" signature="133:735" ph="{...}" />
-                <marker date="1547399027346" expanded="true" signature="185:732" ph="{...}" />
-                <marker date="1547399027346" expanded="true" signature="381:451" ph="{...}" />
-                <marker date="1547399027346" expanded="true" signature="479:549" ph="{...}" />
-                <marker date="1547399027346" expanded="true" signature="584:627" ph="{...}" />
-                <marker date="1547399027346" expanded="true" signature="660:729" ph="{...}" />
+                <marker date="1547988629199" expanded="true" signature="6:113" ph="..." />
+                <marker date="1547988629199" expanded="true" signature="133:195" ph="{...}" />
+                <marker date="1547988629199" expanded="true" signature="185:192" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/DefaultPopupBehaviour.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+              <folding>
+                <marker date="1547989002669" expanded="true" signature="6:113" ph="..." />
+                <marker date="1547989002669" expanded="true" signature="133:618" ph="{...}" />
+                <marker date="1547989002669" expanded="true" signature="188:615" ph="{...}" />
+                <marker date="1547989002669" expanded="true" signature="272:342" ph="{...}" />
+                <marker date="1547989002669" expanded="true" signature="370:440" ph="{...}" />
+                <marker date="1547989002669" expanded="true" signature="475:515" ph="{...}" />
+                <marker date="1547989002669" expanded="true" signature="548:612" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -96,19 +109,43 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+            <state relative-caret-position="450">
+              <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
               <folding>
-                <marker date="1547399940016" expanded="true" signature="6:100" ph="..." />
-                <marker date="1547399940016" expanded="true" signature="120:1362" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="166:1359" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="539:762" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="593:677" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="685:758" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="797:867" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="907:988" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="1031:1141" ph="{...}" />
-                <marker date="1547399940016" expanded="true" signature="1236:1355" ph="{...}" />
+                <marker date="1547996949096" expanded="false" signature="6:100" ph="..." />
+                <marker date="1547996949096" expanded="true" signature="120:1389" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="166:1386" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="539:762" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="593:677" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="685:758" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="797:894" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="805:890" ph="/* ChangeParent(_usedParent, HashtagButtonStatus.Used, true); ... */" />
+                <marker date="1547996949096" expanded="true" signature="934:1015" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="1058:1168" ph="{...}" />
+                <marker date="1547996949096" expanded="true" signature="1263:1382" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/LongTapButton.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="720">
+              <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+              <folding>
+                <marker date="1547996697446" expanded="true" signature="6:98" ph="..." />
+                <marker date="1547996697446" expanded="true" signature="118:1314" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="204:1310" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="514:541" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="598:625" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="650:732" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="685:707" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="764:975" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="863:885" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="997:1027" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="1057:1164" ph="{...}" />
+                <marker date="1547996697446" expanded="true" signature="1195:1307" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -144,27 +181,31 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputContentScroller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AppManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NoDragScrollRect.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F656989-C3F9-47A4-8E6B-97D053AB0C0F/dd/226b709a/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AndroidNativeHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C53FD6A3-0F3A-48DF-8726-A5828F86721F/94/6f19a73a/TouchPhase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C53FD6A3-0F3A-48DF-8726-A5828F86721F/0b/ccd893a7/UnityEvent`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C53FD6A3-0F3A-48DF-8726-A5828F86721F/e7/42752b31/PropertyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputPanelScroller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HashtagExitButtonBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputScroller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NoDragScrollRect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TweenHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ClipboardSender.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C53FD6A3-0F3A-48DF-8726-A5828F86721F/94/6f19a73a/TouchPhase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LongTapButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ToggleSwitcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MenuRotator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GestureRecognizer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TextGenerator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enums.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PanelFader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C53FD6A3-0F3A-48DF-8726-A5828F86721F/e7/42752b31/PropertyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FPSDisplay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputPanelScroller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/HideInSubClassAttributeDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputFieldsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HashtagExitButtonBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/InputScroller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DefaultPopupBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HashtagObjectsManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -191,9 +232,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/HashtagExitButtonBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HashtagInstancer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HashtagObjectsManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DefaultPopupBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LongTapButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs" />
       </list>
     </option>
   </component>
@@ -202,7 +245,7 @@
       <facet id="riderModule/invalid/Default Android Facet" />
     </ignored-facets>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="200" />
     <option name="y" value="107" />
     <option name="width" value="1200" />
@@ -213,27 +256,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="UnityExplorer">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Project" type="e068e287:UnityExplorerRootNode" />
-              <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
-            </path>
-            <path>
-              <item name="Project" type="e068e287:UnityExplorerRootNode" />
-              <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
-              <item name="Scripts" type="1045f7f1:UnityExplorerNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <option name="show-hidden-items" value="false" />
-      </pane>
       <pane id="AssemblyExplorer" />
       <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="UnityExplorer">
+        <option name="show-hidden-items" value="false" />
       </pane>
     </panes>
   </component>
@@ -299,11 +328,14 @@
       <workItem from="1547242435321" duration="1648000" />
       <workItem from="1547382380926" duration="7067000" />
       <workItem from="1547396681818" duration="3557000" />
+      <workItem from="1547590742567" duration="1196000" />
+      <workItem from="1547763188388" duration="1367000" />
+      <workItem from="1547985474425" duration="8094000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94798000" />
+    <option name="totallyTimeSpent" value="105455000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -315,16 +347,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10604113" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10539846" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Captures" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.57005143" visible="true" weight="0.14804845" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.57005143" visible="true" weight="0.05114401" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -702,7 +735,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagInstancer.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/EventsHelper.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
+        <state relative-caret-position="120">
           <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
           <folding>
             <marker date="1547396985254" expanded="false" signature="6:32" ph="..." />
@@ -714,7 +747,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/AndroidNativeHelper.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
+        <state relative-caret-position="1080">
           <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
           <folding>
             <marker date="1547069856247" expanded="true" signature="38:3767" ph="{...}" />
@@ -724,22 +757,6 @@
             <marker date="1547069856247" expanded="true" signature="1306:1420" ph="{...}" />
             <marker date="1547069856247" expanded="true" signature="1482:2665" ph="{...}" />
             <marker date="1547069856247" expanded="true" signature="2735:3758" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
-          <folding>
-            <marker date="1547399027346" expanded="true" signature="6:113" ph="..." />
-            <marker date="1547399027346" expanded="true" signature="133:735" ph="{...}" />
-            <marker date="1547399027346" expanded="true" signature="185:732" ph="{...}" />
-            <marker date="1547399027346" expanded="true" signature="381:451" ph="{...}" />
-            <marker date="1547399027346" expanded="true" signature="479:549" ph="{...}" />
-            <marker date="1547399027346" expanded="true" signature="584:627" ph="{...}" />
-            <marker date="1547399027346" expanded="true" signature="660:729" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -757,29 +774,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F656989-C3F9-47A4-8E6B-97D053AB0C0F/dd/226b709a/Button.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+        <state relative-caret-position="210">
+          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
           <folding>
-            <marker date="1547399940016" expanded="true" signature="6:100" ph="..." />
-            <marker date="1547399940016" expanded="true" signature="120:1362" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="166:1359" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="539:762" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="593:677" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="685:758" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="797:867" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="907:988" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="1031:1141" ph="{...}" />
-            <marker date="1547399940016" expanded="true" signature="1236:1355" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="0:311" ph="/* Decompiled with JetBrains decompiler ... */" />
+            <marker date="1547990134442" expanded="false" signature="319:469" ph="..." />
+            <marker date="1547990134442" expanded="true" signature="495:2735" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="500:619" ph="///   &lt;para&gt;A standard button that can be clicked in order to trigger an event.&lt;/para&gt; ... " />
+            <marker date="1547990134442" expanded="true" signature="751:2733" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="921:933" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="939:1051" ph="///   &lt;para&gt;UnityEvent that is triggered when the button is pressed.&lt;/para&gt; ... " />
+            <marker date="1547990134442" expanded="true" signature="1096:1223" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="1112:1159" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="1169:1217" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="1249:1444" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="1450:1635" ph="///   &lt;para&gt;Registered IPointerClickHandler callback.&lt;/para&gt; ... " />
+            <marker date="1547990134442" expanded="true" signature="1702:1815" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="1821:2000" ph="///   &lt;para&gt;Registered ISubmitHandler callback.&lt;/para&gt; ... " />
+            <marker date="1547990134442" expanded="true" signature="2058:2282" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="2345:2542" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="2500:2535" ph="{...}" />
+            <marker date="1547990134442" expanded="true" signature="2548:2649" ph="///   &lt;para&gt;Function definition for a button click event.&lt;/para&gt; ... " />
+            <marker date="1547990134442" expanded="true" signature="2717:2729" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C53FD6A3-0F3A-48DF-8726-A5828F86721F/0b/ccd893a7/UnityEvent`1.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-420">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagObjectsManager.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="62" column="60" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
+        <state relative-caret-position="380">
+          <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
           <folding>
             <marker date="1547400184037" expanded="false" signature="6:107" ph="..." />
             <marker date="1547400184037" expanded="true" signature="127:2106" ph="{...}" />
@@ -794,6 +827,75 @@
             <marker date="1547400184037" expanded="true" signature="1600:1881" ph="{...}" />
             <marker date="1547400184037" expanded="true" signature="1928:2094" ph="{...}" />
             <marker date="1547400184037" expanded="true" signature="2000:2084" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagPanelManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
+          <folding>
+            <marker date="1547988629199" expanded="true" signature="6:113" ph="..." />
+            <marker date="1547988629199" expanded="true" signature="133:195" ph="{...}" />
+            <marker date="1547988629199" expanded="true" signature="185:192" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DefaultPopupBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <marker date="1547989002669" expanded="true" signature="6:113" ph="..." />
+            <marker date="1547989002669" expanded="true" signature="133:618" ph="{...}" />
+            <marker date="1547989002669" expanded="true" signature="188:615" ph="{...}" />
+            <marker date="1547989002669" expanded="true" signature="272:342" ph="{...}" />
+            <marker date="1547989002669" expanded="true" signature="370:440" ph="{...}" />
+            <marker date="1547989002669" expanded="true" signature="475:515" ph="{...}" />
+            <marker date="1547989002669" expanded="true" signature="548:612" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HashtagButton.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="32" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
+          <folding>
+            <marker date="1547996949096" expanded="false" signature="6:100" ph="..." />
+            <marker date="1547996949096" expanded="true" signature="120:1389" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="166:1386" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="539:762" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="593:677" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="685:758" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="797:894" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="805:890" ph="/* ChangeParent(_usedParent, HashtagButtonStatus.Used, true); ... */" />
+            <marker date="1547996949096" expanded="true" signature="934:1015" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="1058:1168" ph="{...}" />
+            <marker date="1547996949096" expanded="true" signature="1263:1382" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/LongTapButton.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+          <folding>
+            <marker date="1547996697446" expanded="true" signature="6:98" ph="..." />
+            <marker date="1547996697446" expanded="true" signature="118:1314" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="204:1310" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="514:541" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="598:625" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="650:732" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="685:707" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="764:975" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="863:885" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="997:1027" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="1057:1164" ph="{...}" />
+            <marker date="1547996697446" expanded="true" signature="1195:1307" ph="{...}" />
           </folding>
         </state>
       </provider>
