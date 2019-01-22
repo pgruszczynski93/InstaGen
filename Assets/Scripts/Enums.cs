@@ -15,4 +15,9 @@
         Used,
         Available
     }
+
+    public enum ObjectPoolTag
+    {
+        HashtagButton,
+    }
 }

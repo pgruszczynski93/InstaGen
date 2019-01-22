@@ -18,6 +18,7 @@
           <e p="Enums.cs" t="Include" />
           <e p="EventsHelper.cs" t="Include" />
           <e p="FPSDisplay.cs" t="Include" />
+          <e p="GeneratedObjectsPool.cs" t="Include" />
           <e p="GestureRecognizer.cs" t="Include" />
           <e p="HashtagButton.cs" t="Include" />
           <e p="HashtagExitButtonBehaviour.cs" t="Include" />

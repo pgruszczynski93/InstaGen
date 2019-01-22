@@ -7,52 +7,50 @@ namespace InstaGen
 {
 	public class HashtagButton : MonoBehaviour
 	{
-
 		private const string HASH_CHAR = "#";
 
 		[SerializeField] private HashtagButtonStatus _buttonStatus;
-		
-		[SerializeField] private HashtagExitButtonBehaviour _exitButton;
+
+		[SerializeField] private string _assignedString;
+		//[SerializeField] private HashtagExitButtonBehaviour _exitButton;
 		[SerializeField] private Transform _usedParent;
-		[SerializeField] private Transform _availableParent;
 		[SerializeField] private Text _hashtagText;
-		
-		public void ChangeHashtagButtonParent()
+		[SerializeField] private Toggle _toggle;
+
+		private void OnEnable()
 		{
-			if (_buttonStatus == HashtagButtonStatus.Used)
-			{
-				ChangeParent(_availableParent, HashtagButtonStatus.Available, false);
-			}
-			else
-			{
-				ChangeParent(_usedParent, HashtagButtonStatus.Used, true);
-			}
+			_toggle.onValueChanged.AddListener((toggleState) =>
+            {
+                HashtagObjectsManager mainInstance = HashtagObjectsManager.Instance;
+
+                if (toggleState)
+				{
+                    mainInstance.AddToDictionaries(_assignedString);
+				}
+				else
+				{
+                    mainInstance.RemoveFromDictionaries(_assignedString);
+				}
+
+                mainInstance.TextGenerator.GenerateSelectedHashtagsOutput();
+			});
 		}
 
-		public void ParentToUsedPanel()
+		private void OnDisable()
 		{
-			//uncomment it later
-			//	ChangeParent(_usedParent, HashtagButtonStatus.Used, true);
+			_toggle.onValueChanged.RemoveAllListeners();	
 		}
 
-		public void ParentToAvailablePanel()
-		{
-			ChangeParent(_availableParent, HashtagButtonStatus.Available, false);
+		public void ParentToRootPanel(){
+            _toggle.isOn = false;
 		}
 
 		public void SetHashtagText(string text)
 		{
 			string hashtagText = string.Format("{0}{1}", HASH_CHAR, text);
-			_hashtagText.text = hashtagText;
+			_assignedString = hashtagText;
+			_hashtagText.text = _assignedString;
 		}
-
-		private void ChangeParent(Transform parent, HashtagButtonStatus status, bool hasExitButton)
-		{
-			_exitButton.gameObject.SetActive(hasExitButton);
-			transform.SetParent(parent);
-			_buttonStatus = status;
-		}
-
 	}
 
 }

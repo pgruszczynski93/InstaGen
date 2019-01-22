@@ -9,11 +9,11 @@ namespace InstaGen
 			
 		public static Action OnSwipeEnabled = delegate { };
 		public static Action OnInputPanelScrollFinished = delegate {  };
-		public static Action OnHashtagButtonGenerate = delegate{ };
+		public static Action OnHashtagsTextsGenerate = delegate{ };
 		
 		public static Action<MoveDirection> OnScroll = delegate {  };
 		public static Action<SwipeData> OnSwipe = delegate { };
 		public static Action<Vector2> OnObjectDrag = delegate { }; 
- 		
+		
 	}
 }

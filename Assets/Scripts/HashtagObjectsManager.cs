@@ -11,15 +11,32 @@ namespace InstaGen
         private static HashtagObjectsManager _instance = null;
 
         private Dictionary<string, GameObject> _usedHashtags;
-        private Dictionary<string, GameObject> _unusedHashtags;
+        private Dictionary<string, string> _hashtagTexts;
 
         [SerializeField] private GameObject _hashtagButtonPrefab;
         [SerializeField] private TMP_InputField _popupHashtagText;
 
-        [SerializeField] private Transform _availables; //TEMPORARYSOLUTION!!!!! REMOVE LATER
+        [SerializeField] private TextGenerator _textGenerator;
 
+        public TextGenerator TextGenerator
+        {
+            get { return _textGenerator; }
+        }
 
-        public HashtagObjectsManager Instance
+        public Dictionary<string, GameObject> UsedHashtags
+        {
+            get
+            {
+                return _usedHashtags;
+            }
+        }
+
+        public Dictionary<string, string> HashtagTexts
+        {
+            get { return _hashtagTexts; }
+        }
+        
+        public static HashtagObjectsManager Instance
         {
             get { return _instance; }
         }
@@ -39,7 +56,23 @@ namespace InstaGen
         void SetInitialReferences()
         {
             _usedHashtags = new Dictionary<string, GameObject>();
-            _unusedHashtags = new Dictionary<string, GameObject>();
+            _hashtagTexts = new Dictionary<string, string>();
+        }
+
+        public void AddToDictionaries(string hashtagName)
+        {
+            if (_hashtagTexts.ContainsKey(hashtagName) == false)
+            {
+                _hashtagTexts.Add(hashtagName, hashtagName);
+            }
+        }
+
+        public void RemoveFromDictionaries(string hashTagName)
+        {
+            if (_hashtagTexts.ContainsKey(hashTagName))
+            {
+                _hashtagTexts.Remove(hashTagName);
+            }
         }
 
         private void Awake()
@@ -50,30 +83,32 @@ namespace InstaGen
 
         private void OnEnable()
         {
-            EventsHelper.OnHashtagButtonGenerate += GenerateHashtagButton;
+            EventsHelper.OnHashtagsTextsGenerate += GenerateHashtagButton;
         }
 
         private void OnDisable()
         {
-            EventsHelper.OnHashtagButtonGenerate -= GenerateHashtagButton;
+            EventsHelper.OnHashtagsTextsGenerate -= GenerateHashtagButton;
         }
 
         public void GenerateHashtagButton()
         {
-            GameObject go = Instantiate(_hashtagButtonPrefab);
+            GameObject go = GeneratedObjectsPool.Instance.GetFromPool(ObjectPoolTag.HashtagButton);
             HashtagButton hb = go.GetComponent<HashtagButton>();
 
             go.SetActive(true);
-			
-            hb.SetHashtagText(_popupHashtagText.text);
-            hb.ParentToAvailablePanel();
+
+            string hashtagText = _popupHashtagText.text;
+            
+            hb.SetHashtagText(hashtagText);
+            hb.ParentToRootPanel();
         }
 
         public void InvokeOnHashtagGenerate()
         {
-            if (EventsHelper.OnHashtagButtonGenerate != null)
+            if (EventsHelper.OnHashtagsTextsGenerate != null)
             {
-                EventsHelper.OnHashtagButtonGenerate();
+                EventsHelper.OnHashtagsTextsGenerate();
             }
         }
     }    

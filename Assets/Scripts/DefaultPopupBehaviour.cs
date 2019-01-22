@@ -12,12 +12,12 @@ namespace InstaGen
 
 		private void OnEnable()
 		{
-			EventsHelper.OnHashtagButtonGenerate += CloseDefaultPopup;
+			EventsHelper.OnHashtagsTextsGenerate += CloseDefaultPopup;
 		}
 
 		private void OnDisable()
 		{
-			EventsHelper.OnHashtagButtonGenerate -= CloseDefaultPopup;
+			EventsHelper.OnHashtagsTextsGenerate -= CloseDefaultPopup;
 		}
 
 		public void CloseDefaultPopup()
