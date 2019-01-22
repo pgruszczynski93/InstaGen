@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace InstaGen
@@ -18,18 +16,17 @@ namespace InstaGen
 		{
             _toggle.onValueChanged.AddListener((toggleState) =>
             {
-                HashtagObjectsManager mainInstance = HashtagObjectsManager.Instance;
-
+                TextGenerator textGenerator = TextGenerator.Instance;
                 if (toggleState)
 				{
-                    //mainInstance.AddToDictionaries(_assignedString);
-				}
-				else
+                    textGenerator.AddToSelectedHashtagTextsList(_assignedString);
+                }
+                else
 				{
-                    //mainInstance.RemoveFromDictionaries(_assignedString);
-				}
+                    textGenerator.RemoveFromSelectedHashtagTextsList(_assignedString);
+                }
 
-                mainInstance.TextGenerator.GenerateSelectedHashtagsOutput();
+                textGenerator.GenerateSelectedHashtagsOutput();
 			});
 
             _toggle.isOn = false;
@@ -42,9 +39,9 @@ namespace InstaGen
         }
 
 		public void SetHashtagText(string text)
-		{
-			_assignedString = text.GetFormattedHashtag();
-			_hashtagText.text = _assignedString;
+        {
+            _assignedString = text;
+            _hashtagText.text = _assignedString;
 		}
 
 	}

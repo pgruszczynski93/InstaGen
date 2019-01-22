@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using InstaGen;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace InstaGen
@@ -12,13 +9,6 @@ namespace InstaGen
 
         [SerializeField] private GameObject _hashtagButtonPrefab;
         [SerializeField] private TMP_InputField _popupHashtagText;
-
-        [SerializeField] private TextGenerator _textGenerator;
-
-        public TextGenerator TextGenerator
-        {
-            get { return _textGenerator; }
-        }
 
         private void OnEnable()
         {
@@ -35,9 +25,10 @@ namespace InstaGen
             GameObject go = GeneratedObjectsPool.Instance.GetFromPool(ObjectPoolTag.HashtagButton);
             HashtagButton hb = go.GetComponent<HashtagButton>();
 
-            string hashtagText = _popupHashtagText.text;
+            string hashtagText = _popupHashtagText.text.GetFormattedHashtag();
             
             hb.SetHashtagText(hashtagText);
+            TextGenerator.Instance.AddToHashtagTextsList(hashtagText);
         }
 
         public void InvokeOnHashtagGenerate()

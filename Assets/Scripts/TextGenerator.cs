@@ -5,18 +5,26 @@ using UnityEngine.UI;
 
 namespace InstaGen
 {
-    public class TextGenerator : MonoBehaviour
+    public class TextGenerator : GenericSingleton<TextGenerator>
     {
         [SerializeField] private TMP_Text _hashtagsOutputText;
 
         [SerializeField] private List<string> _hashtagTextsList;
-        
-        private void OnEnable()
+        [SerializeField] private List<string> _selectedHashtagsTextsList;
+
+        public void AddToHashtagTextsList(string hashtagText)
         {
+            _hashtagTextsList.AddUnique(hashtagText);
         }
 
-        private void OnDisable()
+        public void AddToSelectedHashtagTextsList(string hashtagText)
         {
+            _selectedHashtagsTextsList.AddUnique(hashtagText);
+        }
+
+        public void RemoveFromSelectedHashtagTextsList(string hashtagText)
+        {
+            _selectedHashtagsTextsList.Remove(hashtagText);
         }
 
         public void GenerateSelectedHashtagsOutput()
@@ -24,11 +32,11 @@ namespace InstaGen
             string textResult = "";
             _hashtagsOutputText.text = "";
 
-            //foreach (KeyValuePair<string, string> pair in HashtagObjectsManager.Instance.HashtagTexts)
-            //{
-            //    textResult += (pair.Value + " ");
-            //}
-            
+            for (int i = 0; i < _selectedHashtagsTextsList.Count; i++)
+            {
+                textResult += (_selectedHashtagsTextsList[i] + " ");
+            }
+
             _hashtagsOutputText.text = textResult;
         }
     }

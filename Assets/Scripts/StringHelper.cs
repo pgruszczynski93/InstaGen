@@ -1,5 +1,4 @@
-﻿
-namespace InstaGen
+﻿namespace InstaGen
 {
     public static class StringHelper
     {
