@@ -8,6 +8,8 @@ namespace InstaGen
     public class TextGenerator : MonoBehaviour
     {
         [SerializeField] private TMP_Text _hashtagsOutputText;
+
+        [SerializeField] private List<string> _hashtagTextsList;
         
         private void OnEnable()
         {
@@ -22,10 +24,10 @@ namespace InstaGen
             string textResult = "";
             _hashtagsOutputText.text = "";
 
-            foreach (KeyValuePair<string, string> pair in HashtagObjectsManager.Instance.HashtagTexts)
-            {
-                textResult += (pair.Value + " ");
-            }
+            //foreach (KeyValuePair<string, string> pair in HashtagObjectsManager.Instance.HashtagTexts)
+            //{
+            //    textResult += (pair.Value + " ");
+            //}
             
             _hashtagsOutputText.text = textResult;
         }

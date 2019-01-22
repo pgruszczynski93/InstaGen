@@ -10,12 +10,14 @@
         Down
     }
 
+    [System.Serializable]
     public enum HashtagButtonStatus
     {
         Used,
         Available
     }
 
+    [System.Serializable]
     public enum ObjectPoolTag
     {
         HashtagButton,
