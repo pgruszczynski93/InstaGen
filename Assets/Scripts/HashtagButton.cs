@@ -5,8 +5,6 @@ namespace InstaGen
 {
 	public class HashtagButton : MonoBehaviour
 	{
-		[SerializeField] private HashtagButtonStatus _buttonStatus;
-
 		[SerializeField] private string _assignedString;
 		[SerializeField] private Transform _usedParent;
 		[SerializeField] private Text _hashtagText;

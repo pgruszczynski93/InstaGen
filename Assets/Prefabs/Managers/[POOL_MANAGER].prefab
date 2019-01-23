@@ -53,6 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pools:
   - objectTag: 0
-    poolSize: 60
+    poolSize: 4
     spawnedPrefab: {fileID: 0}
     parent: {fileID: 0}
